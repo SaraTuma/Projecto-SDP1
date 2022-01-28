@@ -1,0 +1,74 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 6/jan/2022, 2:45:49
+    Author     : saratuma
+*/
+
+
+.seccao-cadastro{
+    background-color: white;
+    height: 25vh;
+    width: 30vw;
+    padding: 1rem;
+    box-shadow: 2px 3px 6px 1px rgba(0, 0, 0, 0.377);
+    display: none;
+}
+
+    .form-Style{
+        
+        padding: 2rem;
+        height: 11vh;
+        display: grid;
+        grid-template-columns: 10vw 15vw;
+        
+    }
+
+    .label-texto{
+        align-self: center;
+    }
+
+    .div-localizacao{
+        text-align: center;
+    }
+    .div-localizacao-interior{
+        margin-top: 1vh;
+        padding: 1vh;
+    }
+    .button-enviar{
+        background-color: rgb(55, 95, 156);
+        border: none;
+        border-radius: 0.5rem;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+.seccao-editar{
+        background-color: white;
+        height: 25vh;
+        width: 30vw;
+        padding: 1rem;
+        box-shadow: 2px 3px 6px 1px rgba(0, 0, 0, 0.377);
+}
+
+.seccao-eliminar{
+    background-color: white;
+    height: 20vh;
+    width: 30vw;
+    padding: 1rem;
+    box-shadow: 2px 3px 6px 1px rgba(0, 0, 0, 0.377);
+}
+
+    .form-eliminar{
+            
+        padding: 2rem;
+        height: 8vh;
+        display: grid;
+        grid-template-columns: 10vw 15vw;
+       
+    }
+    

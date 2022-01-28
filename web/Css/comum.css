@@ -1,0 +1,116 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 6/jan/2022, 2:08:54
+    Author     : saratuma
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+header{
+    background-color: rgb(128, 102, 102);
+    height: 10vh;
+}
+
+.principal{
+    height: 90vh;
+    display: grid;
+    grid-template-columns: 15vw 1fr;
+}
+
+.seccao-esquerda{
+    background-color: rgb(55, 95, 156);
+
+}
+
+    .title{
+        background-color: black;
+        height: 5vh;
+        font-size: 1.3rem;
+        display: grid;
+        place-items: center;
+        color: white;
+    }
+
+    .lista-esquerda{
+        height: 60vh;
+    }
+
+    .link{
+        border: 0.1px rgb(55, 95, 156) solid;
+        background-color: rgb(55, 95, 156);
+        height: 8vh;
+        display: grid;
+        place-items: center;
+    }
+
+
+    .link a{
+        text-decoration: none;
+        color: white;
+        padding: 1rem;
+        width: 13vw;
+        display: grid;
+        place-items: center;
+        font-size: 1.2rem;
+       
+    }
+
+    .active{
+        border-top: 1px white solid;
+        border-bottom: 1px white solid;
+    }
+
+    .link a:hover{
+        border-top: 1px white solid;
+        border-bottom: 1px white solid;
+    }
+
+
+    .lista-esquerda{
+        height: 90vh;
+    } 
+
+
+.seccao-direita{
+    background-color:white;
+    display: grid;
+    justify-content: center;
+    margin-top: 1rem;
+    
+}
+
+    
+    .h1-title{
+        font-size: 1.5rem;
+        color: rgb(55, 95, 156);
+        
+        
+        margin: 1rem;
+    }
+    
+    
+
+    table{
+        margin: 1rem;
+        border-collapse: collapse;
+        padding: 1rem;
+    }
+
+    
+
+    table td{
+        padding: 1rem;
+        text-align: center;
+        border: 1px black solid;
+    }    
+    
+    
+   

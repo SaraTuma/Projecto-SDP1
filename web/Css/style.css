@@ -1,0 +1,76 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 6/jan/2022, 1:19:35
+    Author     : saratuma
+*/
+    #principal{
+                   margin: 0;
+                 padding: 1%;
+                 align-items: center;
+               background-color: whitesmoke;
+
+            }
+            #principal img{
+                margin-left: 10%;
+                 margin-right:  10%;
+                 padding-left: 30%;
+                 
+            
+            }
+            .apresentacao{
+                
+                 padding: 5%;
+                 font-size: 14pt; 
+                 align-items: justify;
+            }
+            
+            
+            
+           /*NEW button link*/
+            
+            body {font-family: Arial, Helvetica, sans-serif;
+            margin: 0; padding: 0;}
+
+
+        /* Set a style for all buttons */
+        button {
+          background-color: rgb(59, 93, 138);
+          color: white;
+          padding: 14px 20px;
+          margin: 10px 10px;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+        }
+
+        button:hover {
+          opacity: 0.8;
+        }
+
+        /* Extra styles for the cancel button */
+        .cancelbtn {
+          width: auto;
+          
+          background-color: #d6645b;
+        }
+        
+        
+        .apresentacao{
+            font-size: 14pt; 
+            align-items: justify;
+        }     
+
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+  }
