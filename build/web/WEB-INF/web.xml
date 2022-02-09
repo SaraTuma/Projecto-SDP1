@@ -5,48 +5,80 @@
         <servlet-class>com.servlet.EditarPessoa</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EditarActor</servlet-name>
-        <servlet-class>com.servlet.EditarActor</servlet-class>
+        <servlet-name>PessoaServlet</servlet-name>
+        <servlet-class>com.servlet.PessoaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditarServlet</servlet-name>
+        <servlet-class>com.servlet.EditarServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CadastrarPessoa</servlet-name>
+        <servlet-class>com.servlet.CadastrarPessoa</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EliminarPessoa</servlet-name>
         <servlet-class>com.servlet.EliminarPessoa</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CadastrarFilmes</servlet-name>
-        <servlet-class>com.servlet.CadastrarFilme</servlet-class>
+        <servlet-name>DefesaServlet</servlet-name>
+        <servlet-class>com.servlet.DefesaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TesteServlet</servlet-name>
+        <servlet-class>com.servlet.TesteServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CadastrarSocio</servlet-name>
         <servlet-class>com.servlet.CadastrarSocio</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CadastrarPessoa</servlet-name>
-        <servlet-class>com.servlet.CadastrarPessoa</servlet-class>
+        <servlet-name>EditarSocio</servlet-name>
+        <servlet-class>com.servlet.EditarSocio</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminarSocio</servlet-name>
+        <servlet-class>com.servlet.EliminarSocio</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EditarPessoa</servlet-name>
         <url-pattern>/EditarPessoa</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EditarActor</servlet-name>
-        <url-pattern>/EditarActor</url-pattern>
+        <servlet-name>PessoaServlet</servlet-name>
+        <url-pattern>/PessoaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditarServlet</servlet-name>
+        <url-pattern>/EditarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CadastrarPessoa</servlet-name>
+        <url-pattern>/CadastrarPessoa</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EliminarPessoa</servlet-name>
         <url-pattern>/EliminarPessoa</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CadastrarFilmes</servlet-name>
-        <url-pattern>/CadastrarFilmes</url-pattern>
+        <servlet-name>DefesaServlet</servlet-name>
+        <url-pattern>/DefesaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TesteServlet</servlet-name>
+        <url-pattern>/TesteServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CadastrarSocio</servlet-name>
         <url-pattern>/CadastrarSocio</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CadastrarPessoa</servlet-name>
-        <url-pattern>/CadastrarPessoa</url-pattern>
+        <servlet-name>EditarSocio</servlet-name>
+        <url-pattern>/EditarSocio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarSocio</servlet-name>
+        <url-pattern>/EliminarSocio</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

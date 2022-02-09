@@ -4,6 +4,8 @@
     Author     : saratuma
 --%>
 
+<%@page import="com.ucan.modelo.EstadoCivil"%>
+<%@page import="com.ucan.dao.EstadoCivilDao"%>
 <%@page import="com.ucan.dao.SexoDao"%>
 <%@page import="com.ucan.modelo.Sexo"%>
 <%@page import="com.ucan.modelo.Provincia"%>
@@ -61,7 +63,7 @@
         <section class="seccao-direita">
         <section id="seccao-3" class="seccao-editar">
                 <h1 class="h1-title">Editar dados de uma Pessoa</h1>
-                <form id="formEditar" class="form-Style formEditar" action="../../EditarPessoa" method="POST" >
+                <form id="formEditar" class="form-Style formEditar" action="../../EditarPessoa?id=<%=request.getParameter("id")%>" method="POST" >
                     
                     <label class="label-texto" for="pessoa">Escolhe a Pessoa</label>
                         
@@ -99,6 +101,23 @@
                                     }
                                 }
                                 %>
+                        </select>
+                        <br>
+                        <label class="label-texto" for="estadoCivil">Estado civil</label>
+                        <select name="estadoCivil">
+                            <option selected="true" ><%=request.getParameter("estado")%></option>
+                            <%
+                                EstadoCivilDao daoe = new EstadoCivilDao();
+                                ArrayList<EstadoCivil> arraye;
+                                arraye = daoe.findAll();
+
+                                for(EstadoCivil estado : arraye){
+                                   if(! estado.getDescricao().equals(request.getParameter("estado"))){
+                                    %><option><%=estado.getDescricao()%> </option><%
+                                   }
+                                }
+                            %>
+                            
                         </select>
                         <br>
                         <div class="div-localizacao">

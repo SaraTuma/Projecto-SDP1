@@ -5,22 +5,24 @@
  */
 package com.ucan.modelo;
 
+import java.sql.Date;
+
 /**
  *
  * @author saratuma
  */
-class Realizador {
+public class Realizador {
     private Integer id;
-    private Pessoa pessoa;
-    private String dataCadastro;
+    private Integer pessoa;
+    private Date dataCadastro;
 
-    public Realizador(Integer id, Pessoa pessoa, String dataCadastro) {
+    public Realizador(Integer id, Integer pessoa, Date dataCadastro) {
         this.id = id;
         this.pessoa = pessoa;
         this.dataCadastro = dataCadastro;
     }
 
-    public Realizador(Pessoa pessoa) {
+    public Realizador(Integer pessoa) {
         this.pessoa = pessoa;
     }
 
@@ -34,13 +36,23 @@ class Realizador {
         this.id = id;
     }
 
-    public String getDataCadastro() {
+    public Date getDataCadastro() {
         return dataCadastro;
     }
 
-    public void setDataCadastro(String dataCadastro) {
+    public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
+
+    public Integer getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Integer pessoa) {
+        this.pessoa = pessoa;
+    }
+    
+    
     
     
 }

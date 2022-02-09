@@ -7,7 +7,9 @@ package com.ucan.utils;
 
 import com.ucan.dao.ActorDao;
 import com.ucan.dao.CategoriaSocioDao;
+import com.ucan.dao.EstadoCivilDao;
 import com.ucan.dao.FilmeDao;
+import com.ucan.dao.MoradaDao;
 import com.ucan.dao.PessoaDao;
 import com.ucan.dao.SexoDao;
 import com.ucan.dao.SocioDao;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import com.ucan.modelo.Actor;
 import com.ucan.modelo.CategoriaSocio;
 import com.ucan.modelo.Filme;
+import com.ucan.modelo.Morada;
 import com.ucan.modelo.Pessoa;
 import com.ucan.modelo.Sexo;
 import com.ucan.modelo.Socio;
@@ -32,7 +35,7 @@ public class TesteFindAll {
         array = dao.findAll();
        
         for(Pessoa p : array){
-            System.out.println("Pk: "+p.getId()+" descricao: "+p.getNome()
+            System.out.println("Pk: "+p.getId()+" descricao: "+p.getNomeCompleto()
             );
         }
     }
@@ -84,18 +87,23 @@ public class TesteFindAll {
       for(Socio socio : socios) {
           System.out.println(""+socio.toString());
         }*/
-      /*  Morada mo = new Morada("500 Casas","Rua do Popalá", 10,42);
-        if(new MoradaDao().insert(mo)){
-        System.out.println("Inseriu");
-        System.out.println(new MoradaDao().findOne(mo));
+      /*
+        Morada mo = new Morada(18,"500 Casas","Rua do Popalá", 10,42);
+        if(new MoradaDao().update(mo)){
+            System.out.println("Actualizou");
+            System.out.println(new MoradaDao().findById(18));
         }
         else
-        System.out.println("Erro ao inserir");
+            System.out.println("Erro ao actualizar");
          */
-      
+      /*
       Integer cate = new CategoriaSocioDao().getId("Efectivo");
       String categ = new CategoriaSocioDao().getDescricao(3);
         System.out.println("Id : "+cate+" decricao: "+categ);
+      */
+      
+      String estadoCivil = new EstadoCivilDao().getDescricao(1);
+        System.out.println("EStado: "+estadoCivil);
       
       /*ArrayList<Pessoa> pessoas = new PessoaDao().findAllNames();
       for(Pessoa pessoa : pessoas) {

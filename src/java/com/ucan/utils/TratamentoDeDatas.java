@@ -25,7 +25,7 @@ public class TratamentoDeDatas
           
         try
         {
-               SimpleDateFormat d= new SimpleDateFormat("dd-MM-yyyy");
+               SimpleDateFormat d= new SimpleDateFormat("yyy-MM-dd");
                java.util.Date dt=d.parse(dataFormatoNormal);
                sqlDate = new java.sql.Date(dt.getTime());
         } catch (ParseException ex) 

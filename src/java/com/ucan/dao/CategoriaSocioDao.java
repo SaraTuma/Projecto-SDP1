@@ -76,7 +76,7 @@ public class CategoriaSocioDao {
                 prepared = conexao.prepareStatement(query);
                 prepared.setInt(1, id);
                 result = prepared.executeQuery();
-                while(result.next()){
+                if(result.next()){
                     descricao = result.getString(1);
                 }
                 

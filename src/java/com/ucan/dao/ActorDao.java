@@ -34,7 +34,7 @@ public class ActorDao {
                 prepared = conexao.prepareStatement(query);
                 ResultSet result = prepared.executeQuery();
                 while(result.next()){
-                    array.add(new Actor(result.getInt(1), result.getInt(2), result.getTimestamp(3)));
+                    array.add(new Actor(result.getInt(1), result.getInt(2), result.getDate(3)));
                 }
                 
                 Conexao.fecharConexaoPR(conexao, prepared, result);

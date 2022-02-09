@@ -21,6 +21,8 @@ import com.ucan.modelo.Morada;
  */
 public class MoradaDao {
      private Connection conexao;
+     private PreparedStatement prepared;
+     private ResultSet result;
      
      public boolean insert( Morada morada){  
         
@@ -138,7 +140,7 @@ public class MoradaDao {
             if(conexao!=null){
                 try {
                     String query = "select pk_morada from public.morada where bairro=? and rua=? and ncasa=? and fk_comuna=?";
-                    PreparedStatement prepared = conexao.prepareStatement(query);
+                    prepared = conexao.prepareStatement(query);
                      prepared.setString(1, morada.getBairro());
                      prepared.setString(2, morada.getRua());
                      prepared.setInt(3, morada.getnCasa());
@@ -158,5 +160,27 @@ public class MoradaDao {
             Logger.getLogger(MoradaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+      
+      
+    public boolean update(Morada morada){        
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "UPDATE public.morada SET bairro=?, rua=?, ncasa=?, fk_comuna=? WHERE pk_morada=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setString(1, morada.getBairro());
+                prepared.setString(2, morada.getRua());
+                prepared.setInt(3, morada.getnCasa());
+                prepared.setInt(4, morada.getComuna());
+                prepared.setInt(5, morada.getId());
+                prepared.execute();
+                Conexao.fecharConexaoP(conexao, prepared);
+                return true;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(MoradaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 }

@@ -21,6 +21,8 @@ import com.ucan.modelo.EstadoCivil;
  */
 public class EstadoCivilDao {
     private Connection conexao;
+    private PreparedStatement prepared;
+    private ResultSet result;
     
     public int getID(String descricao){
        int id=0;
@@ -29,9 +31,9 @@ public class EstadoCivilDao {
             if(conexao!=null){
                 try {
                     String query = "select pk_estado_civil from public.estado_civil where descricao=?";
-                    PreparedStatement prepared = conexao.prepareStatement(query);
+                    prepared = conexao.prepareStatement(query);
                     prepared.setString(1, descricao);
-                    ResultSet result = prepared.executeQuery();
+                    result = prepared.executeQuery();
                     while(result.next()){
                         id=result.getInt("pk_estado_civil");
                     }
@@ -42,9 +44,7 @@ public class EstadoCivilDao {
                 }
             }
             
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(EstadoCivilDao.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(EstadoCivilDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
@@ -75,5 +75,30 @@ public class EstadoCivilDao {
             }
         }
         return array;
+    }
+    
+    public String getDescricao(Integer id){
+       String descricao=null;
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                try {
+                    String query = "select descricao from public.estado_civil where pk_estado_civil=?";
+                    prepared = conexao.prepareStatement(query);
+                    prepared.setInt(1, id);
+                    result = prepared.executeQuery();
+                    if(result.next()){
+                        descricao=result.getString("descricao");
+                    }
+                    Conexao.fecharConexaoPR(conexao, prepared, result);
+                } catch (SQLException ex) {
+                    Logger.getLogger(EstadoCivilDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(EstadoCivilDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return descricao;
     }
 }

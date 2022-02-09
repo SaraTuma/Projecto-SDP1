@@ -34,14 +34,15 @@ public class PessoaDao {
                     String query = "select pk_pessoa from public.pessoa where nome=? and num_bi=? and data_nascimento=? and "
                             + "telefone=? and email=? and fk_morada=? and fk_sexo=? and fk_estado_civil=?";
                     prepared = conexao.prepareStatement(query);
-                    prepared.setString(1, pessoa.getNome());
-                    prepared.setString(2, pessoa.getNumbi());
-                    prepared.setDate(3, pessoa.getDataNasc());
-                    prepared.setString(4, pessoa.getTelefone());
-                    prepared.setString(5, pessoa.getEmail());
-                    prepared.setInt(6, pessoa.getMorada());
-                    prepared.setInt(7, pessoa.getSexo());
-                    prepared.setInt(8, pessoa.getEstadoCivil());
+                    prepared.setString(1, pessoa.getPrimeiroNome());
+                    prepared.setString(2, pessoa.getUltimoNome());
+                    prepared.setString(3, pessoa.getNumbi());
+                    prepared.setDate(4, pessoa.getDataNasc());
+                    prepared.setString(5, pessoa.getTelefone());
+                    prepared.setString(6, pessoa.getEmail());
+                    prepared.setInt(7, pessoa.getMorada());
+                    prepared.setInt(8, pessoa.getSexo());
+                    prepared.setInt(9, pessoa.getEstadoCivil());
                     result = prepared.executeQuery();
                     while(result.next()){
                        id = result.getInt("pk_pessoa");
@@ -69,7 +70,7 @@ public class PessoaDao {
                     prepared = conexao.prepareStatement(query);
                     prepared.setString(1, nome);
                     result = prepared.executeQuery();
-                    while(result.next()){
+                    if(result.next()){
                        id = result.getInt("pk_pessoa");
                     }
                     
@@ -85,6 +86,32 @@ public class PessoaDao {
         return id;
     }
     
+     public boolean verifyBI(String bi){
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                try {
+                    String query = "select * from public.pessoa where num_bi=?";
+                    prepared = conexao.prepareStatement(query);
+                    prepared.setString(1, bi);
+                    result = prepared.executeQuery();
+                    if(result.next()){
+                        Conexao.fecharConexaoPR(conexao, prepared, result);
+                        return true;
+                    }
+                    
+                    Conexao.fecharConexaoPR(conexao, prepared, result);
+                } catch (SQLException ex) {
+                    Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     public ArrayList<Pessoa> findAll() {
        ArrayList<Pessoa> array = new ArrayList<>();
         try {
@@ -95,10 +122,10 @@ public class PessoaDao {
                 result = prepared.executeQuery();
                 while(result.next()){
                     array.add(
-                            new Pessoa(result.getInt(1), result.getString(2), result.getString(3), 
-                                result.getDate(4), result.getString(5), 
-                                result.getString(6), result.getInt(7), result.getInt(8), 
-                                result.getInt(9), result.getString(10))
+                            new Pessoa(result.getInt(1), result.getString(2),result.getString(3), result.getString(4), 
+                                result.getDate(5), result.getString(6), 
+                                result.getString(7), result.getInt(8), result.getInt(9), 
+                                result.getInt(10), result.getString(11))
                     );
                 }
                 
@@ -110,6 +137,55 @@ public class PessoaDao {
         return array;
     }
     
+    
+      
+    public Pessoa findId(Integer id) {
+       Pessoa pessoa=null;
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "select * from pessoa where pk_pessoa=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                result = prepared.executeQuery();
+                if(result.next()){
+                   
+                    pessoa = new Pessoa(result.getInt(1), result.getString(2),result.getString(3), result.getString(4), 
+                                result.getDate(5), result.getString(6), 
+                                result.getString(7), result.getInt(8), result.getInt(9), 
+                                result.getInt(10), result.getString(11))
+                    ;
+                }
+                
+                Conexao.fecharConexaoPR(conexao, prepared, result);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pessoa;
+    }
+    
+    public boolean findPersonById(Integer id) {
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "select * from pessoa where pk_pessoa=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                result = prepared.executeQuery();
+                if(result.next()){
+                    Conexao.fecharConexaoPR(conexao, prepared, result);
+                    return true;
+                }
+                Conexao.fecharConexaoPR(conexao, prepared, result);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    
     public ArrayList<Pessoa> findAllNames() {
        ArrayList<Pessoa> array = new ArrayList<>();
         try {
@@ -120,7 +196,7 @@ public class PessoaDao {
                 result = prepared.executeQuery();
                 while(result.next()){
                     array.add(
-                            new Pessoa(result.getInt(1), result.getString(2))
+                            new Pessoa(result.getInt(1), result.getString(2), result.getString(3))
                     );
                 }
                 
@@ -141,14 +217,15 @@ public class PessoaDao {
 "	nome, num_bi, data_nascimento, telefone, email, fk_morada, fk_sexo, fk_estado_civil)\n" +
 "	VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
                 prepared = conexao.prepareStatement(query);
-                prepared.setString(1, pessoa.getNome());
-                prepared.setString(2, pessoa.getNumbi());
-                prepared.setDate(3, pessoa.getDataNasc());
-                prepared.setString(4, pessoa.getTelefone());
-                prepared.setString(5, pessoa.getEmail());
-                prepared.setInt(6, pessoa.getMorada());
-                prepared.setInt(7, pessoa.getSexo());
-                prepared.setInt(8, pessoa.getEstadoCivil());
+                prepared.setString(1, pessoa.getPrimeiroNome());
+                prepared.setString(2, pessoa.getUltimoNome());
+                prepared.setString(3, pessoa.getNumbi());
+                prepared.setDate(4, pessoa.getDataNasc());
+                prepared.setString(5, pessoa.getTelefone());
+                prepared.setString(6, pessoa.getEmail());
+                prepared.setInt(7, pessoa.getMorada());
+                prepared.setInt(8, pessoa.getSexo());
+                prepared.setInt(9, pessoa.getEstadoCivil());
                 prepared.execute();
                 Conexao.fecharConexaoP(conexao, prepared);
                 r=true;
@@ -161,7 +238,6 @@ public class PessoaDao {
     }
     
     public boolean deleteId(Integer id){    
-        boolean deleted=false;
         try {
             conexao = Conexao.getConexao();
             if(conexao!=null){
@@ -170,38 +246,38 @@ public class PessoaDao {
                 prepared.setInt(1, id);
                 prepared.execute();
                 Conexao.fecharConexaoP(conexao, prepared);
-                deleted=true;
+                return true;
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return deleted;
+        return false;
     }
     
     public boolean deletePessoa(Pessoa pessoa){    
-        boolean deleted=false;
         try {
             conexao = Conexao.getConexao();
             if(conexao!=null){
                 String query = "DELETE from public.pessoa where nome=? and num_bi=? and "
                         + "data_nascimento=? and telefone=? and email=? and fk_morada=? and fk_sexo=?, fk_estado_civil=?";
                 prepared = conexao.prepareStatement(query);
-                prepared.setString(1, pessoa.getNome());
-                prepared.setString(2, pessoa.getNumbi());
-                prepared.setDate(3, pessoa.getDataNasc());
-                prepared.setString(4, pessoa.getTelefone());
-                prepared.setString(5, pessoa.getEmail());
-                prepared.setInt(6, pessoa.getMorada());
-                prepared.setInt(7, pessoa.getSexo());
-                prepared.setInt(8, pessoa.getEstadoCivil());
+                prepared.setString(1, pessoa.getPrimeiroNome());
+                prepared.setString(2, pessoa.getUltimoNome());
+                prepared.setString(3, pessoa.getNumbi());
+                prepared.setDate(4, pessoa.getDataNasc());
+                prepared.setString(5, pessoa.getTelefone());
+                prepared.setString(6, pessoa.getEmail());
+                prepared.setInt(7, pessoa.getMorada());
+                prepared.setInt(8, pessoa.getSexo());
+                prepared.setInt(9, pessoa.getEstadoCivil());
                 prepared.execute();
                 Conexao.fecharConexaoP(conexao, prepared);
-                deleted=true;
+                return true;
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return deleted;
+        return false;
     }
     
     public void deleteBi(String bi){  
@@ -228,14 +304,15 @@ public class PessoaDao {
                         + " fk_morada=?, fk_sexo=?, fk_estado_civil=?"
                         + "WHERE pk_pessoa=?";
                 prepared = conexao.prepareStatement(query);
-                prepared.setString(1, pessoa.getNome());
-                prepared.setString(2, pessoa.getNumbi());
-                prepared.setDate(3, pessoa.getDataNasc());
-                prepared.setString(4, pessoa.getTelefone());
-                prepared.setString(5, pessoa.getEmail());
-                prepared.setInt(6, pessoa.getMorada());
-                prepared.setInt(7, pessoa.getSexo());
-                prepared.setInt(8, pessoa.getEstadoCivil());
+                prepared.setString(1, pessoa.getPrimeiroNome());
+                prepared.setString(2, pessoa.getUltimoNome());
+                prepared.setString(3, pessoa.getNumbi());
+                prepared.setDate(4, pessoa.getDataNasc());
+                prepared.setString(5, pessoa.getTelefone());
+                prepared.setString(6, pessoa.getEmail());
+                prepared.setInt(7, pessoa.getMorada());
+                prepared.setInt(8, pessoa.getSexo());
+                prepared.setInt(9, pessoa.getEstadoCivil());
                 prepared.execute();
                 Conexao.fecharConexaoP(conexao, prepared);
                 return true;

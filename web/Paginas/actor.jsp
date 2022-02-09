@@ -8,6 +8,7 @@
 <%@page import="com.ucan.dao.ActorDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,7 +31,7 @@
         </style>
     </head>
     <body>
-        <%@include  file="../yurao.jsp" %>
+        
     <header>header
 
         
@@ -83,6 +84,7 @@
                                 ArrayList<Actor> actores = new ActorDao().findAll();
                                 String nome=null;
                                 for(Actor actor : actores){
+                                    
                                     nome = new ActorDao().getPessoaNome(actor.getPessoa());
                                     %>
                                     <tr>

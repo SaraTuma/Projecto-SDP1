@@ -5,16 +5,13 @@
  */
 package com.servlet;
 
-import com.ucan.dao.CategoriaSocioDao;
-import com.ucan.dao.PessoaDao;
-import com.ucan.dao.SocioDao;
+import com.ucan.modelo.Socio;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.ucan.modelo.Socio;
 
 /**
  *
@@ -36,18 +33,17 @@ public class CadastrarSocio extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
             Socio socio = new Socio();
-            socio.setCategoria(new CategoriaSocioDao().getId(request.getParameter("categoria").trim()));
-            socio.setPessoa(new PessoaDao().getId(request.getParameter("pessoa").trim()));
-            String mensagem=null;
-            if(new SocioDao().insert(socio)){
-                mensagem = "Cadastrado com sucesso!!";
-            }
-            else{
-                mensagem = "Erro ao cadastrar (no servidor) !!";
-            }
-            
+            socio.setPessoa(Integer.SIZE);
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet CadastrarSocio</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet CadastrarSocio at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

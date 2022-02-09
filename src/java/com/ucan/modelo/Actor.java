@@ -14,17 +14,17 @@ import java.sql.Timestamp;
  */
 public class Actor {
     private Integer id, pessoa;
-    private Timestamp dataCadastro;
+    private Date dataCadastro;
     
     //alterar para fk_pessoa
 
-    public Actor(Integer id, Integer pessoa, Timestamp dataCadastro) {
+    public Actor(Integer id, Integer pessoa, Date dataCadastro) {
         this.id = id;
         this.pessoa = pessoa;
         this.dataCadastro = dataCadastro;
     }
 
-    public Actor(Integer pessoa, Timestamp dataCadastro) {
+    public Actor(Integer pessoa, Date dataCadastro) {
         this.pessoa = pessoa;
         this.dataCadastro = dataCadastro;
     }
@@ -48,11 +48,11 @@ public class Actor {
         this.id = id;
     }
 
-    public Timestamp getDataCadastro() {
+    public Date getDataCadastro() {
         return dataCadastro;
     }
 
-    public void setDataCadastro(Timestamp dataCadastro) {
+    public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
     

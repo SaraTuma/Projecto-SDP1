@@ -44,7 +44,6 @@
     <body>
 <header>header
 
-        
     </header>
     <section class="principal">
         <section class="seccao-esquerda">
@@ -66,14 +65,16 @@
                 <h1 class="h1-title">Cadastrar uma Pessoa</h1>
                     <form id="formCadastro" class="form-Style formCadastro" action="../CadastrarPessoa" method="POST" >
                     
-                        <label class="label-texto" for="nome">Nome Completo</label>
-                        <input type="text" name="nome" id="nome" minlength="4" required>
+                        <label class="label-texto" for="pnome">Primeiro nome</label>
+                        <input type="text" name="pnome" id="nome" minlength="4" required>
+                        <label class="label-texto" for="unome">Ultimo nome</label>
+                        <input type="text" name="unome" id="nome" minlength="4" required>
                         
                         <label class="label-texto" for="bi">Numero do BI (Bilhete de Identidade)</label>
                         <input type="text" name="bi" id="bi" minlength="11" required>
                         
                         <label class="label-texto" for="dataNasc">Data de Nascimento</label>
-                        <input type="date" name="dataNasc" id="dataNasc" required>
+                        <input type="date" name="dataNasc" id="dataNasc"  required="true">
                         
                         <label class="label-texto" for="telefone">Telefone</label>
                         <input type="tel" name="telefone" id="telefone" minlength="9" required>
@@ -84,18 +85,13 @@
                         <label class="label-texto" for="sexo">Sexo </label>
                         <select name="sexo" required>
                             <%
-                                
-                                
                                 SexoDao dao = new SexoDao();
                                 ArrayList<Sexo> array = dao.findAll();
 
                                 for(Sexo s : array){
                                    %><option><%=s.getDescricao()%> </option><%
                                 }
-
-
-
-                                %>
+                            %>
                             
                         </select>
                         <label class="label-texto" for="estadoCivil">Estado civil </label>
@@ -158,7 +154,6 @@
                                 <input type="number" name="ncasa" id="nome_completo" required>
                             </div>
                         </div>
-                      
                         <input type="submit" class="button-enviar" value="Cadastrar">
                         <button class="btn btn-eliminar" onclick="mostrarSeccaoVisualizar()()">Cancelar</button>
                     
@@ -215,7 +210,9 @@
                                    <td><%=pe.getEmail()%> </td>
                                    <td>
                                        <%
-                                           String sexod = new SexoDao().getDescricao(pe.getSexo());%>
+                                           String sexod = new SexoDao().getDescricao(pe.getSexo());
+                                           String estadoCivil = new EstadoCivilDao().getDescricao(pe.getEstadoCivil());
+                                       %>
                                        <%=sexod%> 
                                    </td>
                                     <td>
@@ -226,14 +223,14 @@
                                     
                                     <td class="addBorder">
                                 
-                                    <a class="btn btn-editar" href="./crud/editarPessoa.jsp?nome=<%=pe.getNome()%>&bi=<%=pe.getNumbi()%>
+                                    <a class="btn btn-editar" href="./crud/editarPessoa.jsp?id=<%=pe.getId()%>&nome=<%=pe.getNome()%>&bi=<%=pe.getNumbi()%>
                                        &data=<%=pe.getDataNasc()%>&telefone=<%=pe.getTelefone()%>&email=<%=pe.getEmail()%>&sexo=<%=sexod%>
-                                       &comuna=<%=descricao%>&bairro=<%=mora.getBairro()%>&rua=<%=mora.getRua()%>&casa=<%=mora.getnCasa()%>&estado=<%=pe.getEstadoCivil()%>">Editar</a>
+                                       &comuna=<%=descricao%>&bairro=<%=mora.getBairro()%>&rua=<%=mora.getRua()%>&casa=<%=mora.getnCasa()%>&estado=<%=estadoCivil%>">Editar</a>
                                        
                                        
-                                    <a class="btn btn-eliminar" href="./crud/eliminarPessoa.jsp?nome=<%=pe.getNome()%>&bi=<%=pe.getNumbi()%>
+                                    <a class="btn btn-eliminar" href="./crud/eliminarPessoa.jsp?id=<%=pe.getId()%>&nome=<%=pe.getNome()%>&bi=<%=pe.getNumbi()%>
                                        &data=<%=pe.getDataNasc()%>&telefone=<%=pe.getTelefone()%>&email=<%=pe.getEmail()%>&sexo=<%=sexod%>
-                                       &comuna=<%=descricao%>&bairro=<%=mora.getBairro()%>&rua=<%=mora.getRua()%>&casa=<%=mora.getnCasa()%>">Eliminar</a>
+                                       &comuna=<%=descricao%>&bairro=<%=mora.getBairro()%>&rua=<%=mora.getRua()%>&casa=<%=mora.getnCasa()%>&estado=<%=estadoCivil%>">Eliminar</a>
                                 
                                     </td>
                         </tr><%

@@ -35,7 +35,7 @@ public class SocioDao {
                     prepared = conexao.prepareStatement(query);
                     result = prepared.executeQuery();
                     while(result.next()){
-                        array.add(new Socio(result.getInt(1),result.getInt(2), result.getInt(3), result.getTimestamp(4)));
+                        array.add(new Socio(result.getInt(1),result.getInt(2), result.getInt(3), result.getDate(4)));
                     }
                     
                     Conexao.fecharConexaoPR(conexao, prepared, result);

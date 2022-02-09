@@ -5,7 +5,7 @@
  */
 package com.ucan.modelo;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 /**
  *
@@ -13,16 +13,16 @@ import java.sql.Timestamp;
  */
 public class Socio {
     private Integer id, pessoa, categoria;
-    private Timestamp dataCadastro;
+    private Date dataCadastro;
 
-    public Socio(Integer id, Integer pessoa, Integer categoria, Timestamp dataCadastro) {
+    public Socio(Integer id, Integer pessoa, Integer categoria, Date dataCadastro) {
         this.id = id;
         this.pessoa = pessoa;
         this.categoria = categoria;
         this.dataCadastro = dataCadastro;
     }
 
-    public Socio(Integer pessoa, Integer categoria, Timestamp dataCadastro) {
+    public Socio(Integer pessoa, Integer categoria, Date dataCadastro) {
         this.pessoa = pessoa;
         this.categoria = categoria;
         this.dataCadastro = dataCadastro;
@@ -60,11 +60,11 @@ public class Socio {
         this.categoria = categoria;
     }
 
-    public Timestamp getDataCadastro() {
+    public Date getDataCadastro() {
         return dataCadastro;
     }
 
-    public void setDataCadastro(Timestamp dataCadastro) {
+    public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
 

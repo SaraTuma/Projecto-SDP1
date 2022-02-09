@@ -13,11 +13,12 @@ import java.sql.Date;
  */
 public class Pessoa {
     private Integer id, estadoCivil, morada, sexo;
-    private String nome, numbi, telefone, email, datacadastro;
+    private String numbi, telefone, email, datacadastro, primeiroNome, ultimoNome, nomeCompleto;
     private Date dataNasc;
 
-    public Pessoa(String nome, String numbi, Date dataNasc, String telefone, String email, Integer sexo, Integer estadoCivil, Integer morada) {
-        this.nome = nome;
+    public Pessoa(String primeiroNome,String ultimoNome, String numbi, Date dataNasc, String telefone, String email, Integer sexo, Integer estadoCivil, Integer morada) {
+        this.primeiroNome = primeiroNome;
+        this.ultimoNome = ultimoNome;
         this.numbi = numbi;
         this.dataNasc = dataNasc;
         this.telefone = telefone;
@@ -25,6 +26,7 @@ public class Pessoa {
         this.sexo = sexo;
         this.estadoCivil = estadoCivil;
         this.morada = morada;
+        this.nomeCompleto=primeiroNome+" "+ultimoNome;
     }
 
     public Pessoa() {
@@ -32,12 +34,13 @@ public class Pessoa {
 
     
 
-    public Pessoa(Integer id, String nome, String numbi, 
+    public Pessoa(Integer id, String primeiroNome,String ultimoNome, String numbi, 
             Date dataNasc, String telefone, 
             String email, Integer morada, Integer sexo, 
             Integer estadoCivil, String datacadastro) {
         this.id = id;
-        this.nome = nome;
+        this.primeiroNome = primeiroNome;
+        this.ultimoNome = ultimoNome;
         this.numbi = numbi;
         this.dataNasc = dataNasc;
         this.telefone = telefone;
@@ -46,6 +49,7 @@ public class Pessoa {
         this.sexo = sexo;
         this.estadoCivil = estadoCivil;
         this.morada = morada;
+        this.nomeCompleto=primeiroNome+" "+ultimoNome;
     }
 
    
@@ -58,13 +62,30 @@ public class Pessoa {
         this.datacadastro = datacadastro;
     }
 
-    
+    public String getPrimeiroNome() {
+        return primeiroNome;
+    }
 
-   
+    public void setPrimeiroNome(String primeiroNome) {
+        this.primeiroNome = primeiroNome;
+        this.nomeCompleto=primeiroNome+" ";
+    }
 
-    public Pessoa(Integer id, String nome) {
+    public String getUltimoNome() {
+        return ultimoNome;
+    }
+
+    public void setUltimoNome(String ultimoNome) {
+        this.ultimoNome = ultimoNome;
+        this.nomeCompleto+=ultimoNome;
+    }
+
+
+    public Pessoa(Integer id, String primeiroNome, String ultimoNome) {
         this.id = id;
-        this.nome = nome;
+        this.primeiroNome = primeiroNome;
+        this.ultimoNome = ultimoNome;
+        this.nomeCompleto=primeiroNome+" "+ultimoNome;
     }
 
     public Integer getId() {
@@ -75,13 +96,7 @@ public class Pessoa {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nomeCompleto) {
-        this.nome = nomeCompleto;
-    }
+    
 
     public Integer getMorada() {
         return morada;
@@ -141,10 +156,18 @@ public class Pessoa {
         this.estadoCivil = estadoCivil;
     }
 
+    public String getNomeCompleto() {
+        return nomeCompleto;
+    }
+
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
+    }
+
     @Override
     public String toString() {
         return "Pessoa{" + "id=" + id + ", estadoCivil=" + estadoCivil + ", morada=" + morada + ", "
-                + "sexo=" + sexo + ", nome=" + nome + ", numbi=" + numbi + ", dataNasc=" + dataNasc + ", "
+                + "sexo=" + sexo + ", primeiro nome=" + primeiroNome + ", ultimo nome="+ultimoNome+", numbi=" + numbi + ", dataNasc=" + dataNasc + ", "
                 + "telefone=" + telefone + ", email=" + email + ", datacadastro=" + datacadastro + '}';
     }
     

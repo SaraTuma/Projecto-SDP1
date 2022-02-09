@@ -52,13 +52,15 @@
         </section>
         <section class="seccao-direita">
         <section id="seccao-3" class="seccao-editar">
-                <h1 class="h1-title">Eliminar dados de uma Pessoa</h1>
-                <form id="formEditar" class="form-Style formEditar" action="../../EliminarPessoa" method="post" >
+                <h1 class="h1-title">Eliminar : <%=request.getParameter("nome") %></h1>
+                <form id="formEditar" class="form-Style formEditar" action="../../EliminarPessoa?id=<%=request.getParameter("id")%>" method="post" >
                  
-                        <label class="label-texto" for="nome">Nome Completo</label>
-                        <input type="text" name="nome" disabled="disabled" value="<%=request.getParameter("nome") %>">
+                        <label class="label-texto" for="pnome">Primeiro nome</label>
+                        <input type="text" name="pnome" disabled="disabled" value="<%=request.getParameter("nome") %>">
                         <br>
-                        
+                        <label class="label-texto" for="unome">Ultimo nome</label>
+                        <input type="text" name="unome" disabled="disabled" value="<%=request.getParameter("nome") %>">
+                        <br>
                         <label class="label-texto" for="bi">Numero do BI (Bilhete de Identidade) : </label>
                         <input type="text" name="bi" disabled="disabled" value="<%=request.getParameter("bi") %>">
                         <br>
@@ -77,6 +79,11 @@
                             <option selected="true" disabled="disabled"><%=request.getParameter("sexo")%></option>
                         </select>
                         <br>
+                        <label class="label-texto" for="estadoCivil">Estado Civil : </label>
+                        <select name="estadoCivil" >
+                            <option selected="true" disabled="disabled"><%=request.getParameter("estado")%></option>
+                        </select>
+                        <br>
                         <label class="label-texto" for="localizacao">Localização </label>
                         <div class="div-localizacao">
                             <% 
@@ -85,7 +92,6 @@
                                 Integer idMuni = nova.getMunicipio();
                                 Municipio municipio = new MunicipioDao().findMunicipio(idMuni);
                                 String provincia = new ProvinciaDao().getDescricao(municipio.getProvincia());
-                                    
                             %>
                             <select class="div-localizacao-interior" name="provincia">
                                 <option selected="true" disabled="disabled"><%=provincia%></option>

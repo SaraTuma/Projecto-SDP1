@@ -36,27 +36,15 @@
         </section>
         <section class="seccao-direita">
         <section id="seccao-3" class="seccao-editar">
-                <h1 class="h1-title">Editar dados de um Actor</h1>
-                <form id="formEditar" class="form-Style formEditar" action="" method="post" >
+                <h1 class="h1-title">Editar dados de um Sócio</h1>
+                <form id="formEditar" class="form-Style formEditar" action="../../EditarSocio?id=<%=request.getParameter("id")%>" method="post" >
                     
-                        <label class="label-texto" for="actor">Escolhe o Socio</label>
-                        <select name="actor">
-                            <option value="">Sara Tuma</option>
-                            <option value="">Isaura Manico</option>
-                            <option value="">Marilda Sungu</option>
-                            <option value="">Creuma Kuzola</option>
-                        </select>
+                        <label class="label-texto" for="nome">Nome do Socio</label>
+                        <input type="text" name="nome" value="<%=request.getParameter("nome") %>">
                         <label class="label-texto" for="actor">Categoria o Socio</label>
-                        <select name="actor">
-                            <option value="">Sara Tuma</option>
-                            <option value="">Isaura Manico</option>
-                            <option value="">Marilda Sungu</option>
-                            <option value="">Creuma Kuzola</option>
-                        </select>
-                        <label class="label-texto" for="data_cadastro">Data de Cadastro</label>
-                        <input type="date" name="data_cadastro" id="data_cadastro">                      
+                        <input type="text" name="categoria"  value="<%=request.getParameter("categoria") %>">                    
                         <input type="submit" class="button-enviar" value="Editar">
-                        <a class="button-enviar btn btn-eliminar" href="../socio.jsp">Cancelar</a>
+                        <a class=" btn btn-eliminar" href="../socio.jsp">Cancelar</a>
                     
                 </form>
             </section>

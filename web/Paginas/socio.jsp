@@ -67,16 +67,19 @@
                     <tbody>
                         <%
                             ArrayList<Socio> socios = new SocioDao().findAll();
+                            String nome, categoria;
                             for(Socio socio : socios) {
+                                nome = new PessoaDao().findId(socio.getPessoa()).getNome();
+                                categoria = new CategoriaSocioDao().getDescricao(socio.getCategoria());
                               %>
                         <tr>
-                            <td class="addBorder"><%=socio.getPessoa()%></td>
-                            <td class="addBorder"><%=socio.getCategoria()%></td>
+                            <td class="addBorder"><%=nome%></td>
+                            <td class="addBorder"><%=categoria%></td>
                             <td class="addBorder"><%=socio.getDataCadastro()%></td>
                             <td class="addBorder">
                                 
-                                <a class="btn btn-editar" href="./crud/editarSocio.jsp">Editar</a>
-                                <a class="btn btn-eliminar" href="./crud/eliminarSocio.jsp">Eliminar</a>
+                                <a class="btn btn-editar" href="./crud/editarSocio.jsp?nome=<%=nome%>&categoria=<%=categoria%>">Editar</a>
+                                <a class="btn btn-eliminar" href="./crud/eliminarSocio.jsp?nome=<%=nome%>&categoria=<%=categoria%>">Eliminar</a>
                                 
                             </td>
                         </tr>
@@ -103,29 +106,16 @@
                         <select name="categoria" required="true">
                             <%
                                 ArrayList<CategoriaSocio> categorias = new CategoriaSocioDao().findAll();
-                                for(CategoriaSocio categoria : categorias) {
+                                for(CategoriaSocio categoriaNew : categorias) {
                             %>
-                            <option><%=categoria.getDescricao()%></option>
+                            <option><%=categoriaNew.getDescricao()%></option>
                             <%}%>
                         </select>                    
                         <input type="submit" class="button-enviar" value="Cadastrar">
-                        <button class="btn btn-eliminar" onclick="mostrarSeccaoVisualizar()">Cancelaaaaar</button>
+                        <a class="btn btn-eliminar" href="socio.jsp">Cancelar</a>
                 </form>
             </section>
             
-            <section id="seccao-4" class="seccao-eliminar">
-                <h1 class="h1-title">Eliminar um Socio</h1>
-                <form id="formEditar" class="form-Style form-eliminar" action="" method="post" >
-                    <label class="label-texto" for="pessoa">Escolhe o Socio</label>
-                    <select name="actor">
-                        <option value="">Sara Tuma</option>
-                        <option value="">Isaura Manico</option>
-                        <option value="">Marilda Sungu</option>
-                        <option value="">Creuma Kuzola</option>
-                    </select>
-                    <input type="submit" class="button-enviar" value="Eliminar">
-                </form>
-            </section>
     </section>
    
     </body>
