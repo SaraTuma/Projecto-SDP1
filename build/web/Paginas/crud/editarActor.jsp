@@ -34,10 +34,6 @@
     </head>
     <body>
         
-<header>header
-
-        
-    </header>
     <section class="principal">
         <section class="seccao-esquerda">
             <div class="title"><strong>Administração</strong></div>

@@ -37,9 +37,7 @@
         </style>
     </head>
     <body>
-<header>header
 
-    </header>
     <section class="principal">
         <section class="seccao-esquerda">
             <div class="title"><strong>Administração</strong></div>
@@ -53,6 +51,8 @@
                 <li class="link"><a href="#">Filme</a></li>
                 <li class="link"><a href="filme-actor.jsp">Actores de Filmes</a></li>
                 <li class="link"><a href="alugar.jsp">Alugar</a></li>
+                <li class="link"><a href="telefone.jsp">Telefone</a></li>
+                <li class="link"><a href="email.jsp">Email</a></li>
             </ul>
         </section>
         <section class="seccao-direita">
@@ -82,7 +82,7 @@
                                 ArrayList<Realizador> array = dao.findAll();
 
                                 for(Realizador realizador : array){
-                                   %><option><%=new PessoaDao().findId(realizador.getPessoa()).getNome()%> </option><%
+                                   %><option><%=new PessoaDao().findId(realizador.getPessoa()).getNomeCompleto()%> </option><%
                                 }
                             %>
                             

@@ -41,10 +41,6 @@
     </head>
     <body>
         
-<header>header
-
-        
-    </header>
     <section class="principal">
         <section class="seccao-esquerda">
             <div class="title"><strong>Administração</strong></div>
@@ -67,9 +63,11 @@
                     
                     <label class="label-texto" for="pessoa">Escolhe a Pessoa</label>
                         
-
-                        <label class="label-texto" for="nome">Nome Completo</label>
-                        <input type="text" name="nome" id="nome_completo" value="<%=request.getParameter("nome") %>">
+                        <label class="label-texto" for="pnome">Primeiro Nome</label>
+                        <input type="text" name="pnome" id="nome_completo" value="<%=request.getParameter("pnome") %>">
+                        <br>
+                        <label class="label-texto" for="unome">Ultimo Nome</label>
+                        <input type="text" name="unome" id="nome_completo" value="<%=request.getParameter("unome") %>">
                         <br>
                         
                         <label class="label-texto" for="bi">Numero do BI (Bilhete de Identidade)</label>

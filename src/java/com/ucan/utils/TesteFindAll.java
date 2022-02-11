@@ -22,6 +22,8 @@ import com.ucan.modelo.Morada;
 import com.ucan.modelo.Pessoa;
 import com.ucan.modelo.Sexo;
 import com.ucan.modelo.Socio;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -67,48 +69,53 @@ public class TesteFindAll {
      */
     public static void main(String[] args) {
         
-      // System.out.println(new MoradaDao().getID("Femeninoyyy"));
-     /*Morada mo = new Morada("Bairro Kikolo","Rua 12",234,14);
-      
-        System.out.println(mo.toString());
-        System.out.println(new MoradaDao().findOne(mo));
-       */
-      //  System.out.println(new EstadoCivilDao().getID("Solteiro/a"));
-      
-      /*  Pessoa pessoa = new Pessoa("Luela Maria","0002799HA610", TratamentoDeDatas.converterDataNormalParaDataSQL("23-07-2000"),"945234567","luelamaria@gmail.com",1,2,45);
-        if(new PessoaDao().insert(pessoa))
+        try {
+            // System.out.println(new MoradaDao().getID("Femeninoyyy"));
+            /*Morada mo = new Morada("Bairro Kikolo","Rua 12",234,14);
+            
+            System.out.println(mo.toString());
+            System.out.println(new MoradaDao().findOne(mo));
+            */
+            //  System.out.println(new EstadoCivilDao().getID("Solteiro/a"));
+            
+            /*  Pessoa pessoa = new Pessoa("Luela Maria","0002799HA610", TratamentoDeDatas.converterDataNormalParaDataSQL("23-07-2000"),"945234567","luelamaria@gmail.com",1,2,45);
+            if(new PessoaDao().insert(pessoa))
             
             System.out.println("adicionado com sucesso");
-        else
+            else
             System.out.println("ERRO");
-      */
-      /*
-      ArrayList<Socio> socios = new SocioDao().findAll();
-      for(Socio socio : socios) {
-          System.out.println(""+socio.toString());
-        }*/
-      /*
-        Morada mo = new Morada(18,"500 Casas","Rua do Popalá", 10,42);
-        if(new MoradaDao().update(mo)){
+            */
+            /*
+            ArrayList<Socio> socios = new SocioDao().findAll();
+            for(Socio socio : socios) {
+            System.out.println(""+socio.toString());
+            }*/
+            /*
+            Morada mo = new Morada(18,"500 Casas","Rua do Popalá", 10,42);
+            if(new MoradaDao().update(mo)){
             System.out.println("Actualizou");
             System.out.println(new MoradaDao().findById(18));
-        }
-        else
+            }
+            else
             System.out.println("Erro ao actualizar");
-         */
-      /*
-      Integer cate = new CategoriaSocioDao().getId("Efectivo");
-      String categ = new CategoriaSocioDao().getDescricao(3);
-        System.out.println("Id : "+cate+" decricao: "+categ);
-      */
-      
-      String estadoCivil = new EstadoCivilDao().getDescricao(1);
-        System.out.println("EStado: "+estadoCivil);
-      
-      /*ArrayList<Pessoa> pessoas = new PessoaDao().findAllNames();
-      for(Pessoa pessoa : pessoas) {
-          System.out.println(""+pessoa.toString());
-        }*/
+            */
+            /*
+            Integer cate = new CategoriaSocioDao().getId("Efectivo");
+            String categ = new CategoriaSocioDao().getDescricao(3);
+            System.out.println("Id : "+cate+" decricao: "+categ);
+            */
+            
+            pessoaFindAll();
+            
+            /*ArrayList<Pessoa> pessoas = new PessoaDao().findAllNames();
+            for(Pessoa pessoa : pessoas) {
+            System.out.println(""+pessoa.toString());
+            }*/
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TesteFindAll.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TesteFindAll.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     

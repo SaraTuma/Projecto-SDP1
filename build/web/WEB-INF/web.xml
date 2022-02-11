@@ -40,6 +40,30 @@
         <servlet-name>EliminarSocio</servlet-name>
         <servlet-class>com.servlet.EliminarSocio</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CadastrarEmail</servlet-name>
+        <servlet-class>com.servlet.CadastrarEmail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditarEmail</servlet-name>
+        <servlet-class>com.servlet.EditarEmail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminarEmail</servlet-name>
+        <servlet-class>com.servlet.EliminarEmail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CadastrarTelefone</servlet-name>
+        <servlet-class>com.servlet.CadastrarTelefone</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditarTelefone</servlet-name>
+        <servlet-class>com.servlet.EditarTelefone</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminarTelefone</servlet-name>
+        <servlet-class>com.servlet.EliminarTelefone</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EditarPessoa</servlet-name>
         <url-pattern>/EditarPessoa</url-pattern>
@@ -79,6 +103,30 @@
     <servlet-mapping>
         <servlet-name>EliminarSocio</servlet-name>
         <url-pattern>/EliminarSocio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CadastrarEmail</servlet-name>
+        <url-pattern>/CadastrarEmail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditarEmail</servlet-name>
+        <url-pattern>/EditarEmail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarEmail</servlet-name>
+        <url-pattern>/EliminarEmail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CadastrarTelefone</servlet-name>
+        <url-pattern>/CadastrarTelefone</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditarTelefone</servlet-name>
+        <url-pattern>/EditarTelefone</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarTelefone</servlet-name>
+        <url-pattern>/EliminarTelefone</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

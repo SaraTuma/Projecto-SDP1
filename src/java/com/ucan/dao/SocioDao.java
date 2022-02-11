@@ -52,7 +52,6 @@ public class SocioDao {
       
       
        public boolean insert( Socio socio){  
-        boolean r=false;
         try {
             conexao = Conexao.getConexao();
             if(conexao!=null){
@@ -61,14 +60,14 @@ public class SocioDao {
                 prepared.setInt(1, socio.getPessoa());
                 prepared.setInt(2, socio.getCategoria());
                 
-                //prepared.execute();
+                prepared.execute();
                 Conexao.fecharConexaoP(conexao, prepared);
-                r=true;
+                return true;
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(SocioDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return r;
+        return false;
         
     }
 }

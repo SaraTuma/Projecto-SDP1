@@ -15,10 +15,7 @@
         <script src="../Javascript/comum.js"></script>
     </head>
     <body>
-         <header>header
-
-        
-    </header>
+       
     <section class="principal">
         <section class="seccao-esquerda">
             <div class="title"><strong>Administração</strong></div>
@@ -30,6 +27,8 @@
                 <li class="link"><a href="filme.jsp">Filme</a></li>
                 <li class="link"><a  href="filme-actor.jsp">Actores e Filmes</a></li>
                 <li class="link"><a class="active" href="#">Alugados</a></li>
+                <li class="link"><a href="telefone.jsp">Telefone</a></li>
+                <li class="link"><a href="email.jsp">Email</a></li>
             </ul>
         </section>
         <section class="seccao-direita">

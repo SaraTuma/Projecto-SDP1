@@ -840,7 +840,7 @@ INSERT INTO pessoa(pnome,unome, num_bi, data_nascimento,fk_morada, fk_sexo, fk_e
 ( 'Mirela','Miguel','0002749HA010', '22-08-2000', 44, 1, 1, '19-11-2021');
 INSERT INTO pessoa(pnome,unome, num_bi, data_nascimento, fk_morada, fk_sexo, fk_estado_civil, data_cadastro) VALUES 
 ( 'Clelia','Daniel','0002759HA010', '25-11-1994', 45, 1, 2, '12-03-2012');
-INSERT INTO pessoa(pnome,unome, num_bi, data_nascimento, telefone, email, fk_morada, fk_sexo, fk_estado_civil, data_cadastro) VALUES 
+INSERT INTO pessoa(pnome,unome, num_bi, data_nascimento, fk_morada, fk_sexo, fk_estado_civil, data_cadastro) VALUES 
 ( 'Rafaela','Ernesto','0002769HA010', '12-08-1997', 46, 1, 3, '09-02-2009');
 INSERT INTO pessoa(pnome,unome, num_bi, data_nascimento,fk_morada, fk_sexo, fk_estado_civil, data_cadastro) VALUES 
 ( 'Kiala','Afonso','0002779HA010', '13-12-2000', 47, 2, 2,'05-01-2019');
@@ -880,6 +880,7 @@ INSERT INTO pessoa(pnome,unome, num_bi, data_nascimento, fk_morada, fk_sexo, fk_
 ( 'Jessica','Pedro','0002799HA310', '24-08-2000', 12, 1, 3, '18-09-2020');
 INSERT INTO pessoa(pnome,unome, num_bi, data_nascimento, fk_morada, fk_sexo, fk_estado_civil, data_cadastro) VALUES 
 ( 'Jessy','Antonio','0002799HA410', '25-08-2003', 13, 2, 3, '10-12-2021');
+
 	
 -- Telefones
 INSERT INTO public.telefone(descricao, fk_pessoa) VALUES ('948142117', 1);
@@ -1046,9 +1047,65 @@ INSERT INTO filme( titulo_orig, titulo_port, sinopse, duracao, fk_realizador, fk
 	'
 	,'03:06:00', 9, 2, 4, 2014);
 	
-	
 --Filme actor
 
-
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (1, 1, '12-02-2017');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (1, 2, '12-02-2017');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (1, 3, '10-08-2017');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (2, 1, '18-05-2019');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (2, 4, '29-12-2010');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (2, 5, '12-02-2010');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (3, 6, '01-11-2011');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (3, 7, '01-11-2012');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (4, 8, '12-02-2001');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (5, 8, '10-10-2019');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (5, 9, '03-05-2021');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (6, 10, '17-02-2021');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (6, 11, '12-02-2017');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (7, 11, '07-03-2016');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (1, 12, '12-02-2017');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (3, 13, '12-02-2017');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (8, 14, '19-12-2010');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (9, 15, '20-11-2012');
+INSERT INTO public.filme_actor(fk_filme, fk_actor, data_cadastro)VALUES (1, 5, '12-02-2017');
 
 -- Alugados
+
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('12-12-2020', '13-12-2020', 1, 1, '12-12-2020');
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('12-12-2010', '12-01-2011', 1, 2, '12-12-2020');
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('12-01-2021', '12-02-2021', 2, 1, '12-01-2021');
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('12-02-2011', '12-03-2011', 2, 2, '12-02-2011');
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('23-04-2012', '23-05-2012', 3, 3, '23-04-2012');
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('25-08-2013', '25-09-2013', 4, 3, '12-12-2013');
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('01-03-2021', '01-04-2021', 4, 1, '12-03-2021');
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('10-02-2021', '10-03-2021', 4, 2, '10-02-2021');
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('15-04-2021', '15-05-2021', 4, 3, '15-04-2021');
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('01-05-2021', '01-06-2021', 5, 1, '12-07-2021');
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('01-01-2021', '01-02-2021', 6, 4, '12-01-2021');
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('15-07-2021', '16-07-2021', 7, 5, '15-07-2021');
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('17-08-2021', '19-08-2021', 8, 6, '17-08-2021');
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('01-09-2021', '01-10-2021', 9, 7, '01-09-2021');
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('28-10-2021', '30-10-2021', 10, 8, '28-10-2021');
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('14-11-2021', '19-11-2021', 11, 9, '14-11-2021');
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('18-11-2021', '22-11-2021', 11, 10, '18-11-2021');
+INSERT INTO public.alugar( data_alugar, data_devolucao, fk_socio, fk_filme, data_cadastro)
+	VALUES ('14-12-2021', '19-12-2021', 12, 10, '14-12-2021');
+
+

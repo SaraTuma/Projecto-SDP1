@@ -42,9 +42,6 @@
         </style>
     </head>
     <body>
-<header>header
-
-    </header>
     <section class="principal">
         <section class="seccao-esquerda">
             <div class="title"><strong>Administração</strong></div>
@@ -58,6 +55,8 @@
                 <li class="link"><a href="filme.jsp">Filme</a></li>
                 <li class="link"><a href="filme-actor.jsp">Actores de Filmes</a></li>
                 <li class="link"><a href="alugar.jsp">Alugar</a></li>
+                <li class="link"><a href="telefone.jsp">Telefone</a></li>
+                <li class="link"><a href="email.jsp">Email</a></li>
             </ul>
         </section>
         <section class="seccao-direita">
@@ -75,12 +74,6 @@
                         
                         <label class="label-texto" for="dataNasc">Data de Nascimento</label>
                         <input type="date" name="dataNasc" id="dataNasc"  required="true">
-                        
-                        <label class="label-texto" for="telefone">Telefone</label>
-                        <input type="tel" name="telefone" id="telefone" minlength="9" required>
-                        
-                        <label class="label-texto" for="email">E-mail</label>
-                        <input type="email" name="email" id="email" required>
                         
                         <label class="label-texto" for="sexo">Sexo </label>
                         <select name="sexo" required>
@@ -183,9 +176,8 @@
                             <td class="addBorder"><strong>Nome</strong></td>
                             <td class="addBorder"><strong>Bilhete de Identidade</strong></td>
                             <td class="addBorder"><strong>Data de nascimento</strong></td>
-                            <td class="addBorder"><strong>Telefone</strong></td>
-                            <td class="addBorder"><strong>Email</strong></td>
                             <td class="addBorder"><strong>Sexo</strong></td>
+                            <td class="addBorder"><strong>Estado civil</strong></td>
                             <td class="addBorder"><strong>Morada</strong></td>
                             <td class="addBorder"><strong>Acção</strong></td>
                         </tr>
@@ -203,11 +195,9 @@
                                     Morada mora = morada.findById(pe.getMorada());
                                    %>
                                 <tr>
-                                   <td><%=pe.getNome()%> </td>
+                                   <td><%=pe.getNomeCompleto()%> </td>
                                    <td><%=pe.getNumbi()%> </td>
                                    <td><%=pe.getDataNasc()%> </td>
-                                   <td><%=pe.getTelefone()%> </td>
-                                   <td><%=pe.getEmail()%> </td>
                                    <td>
                                        <%
                                            String sexod = new SexoDao().getDescricao(pe.getSexo());
@@ -215,6 +205,7 @@
                                        %>
                                        <%=sexod%> 
                                    </td>
+                                   <td><%=estadoCivil%></td>
                                     <td>
                                        <% String descricao = new ComunaDao().getDescricao(mora.getComuna());%>
                                        <%=descricao%> - <%=mora.getBairro()%> <br>
@@ -223,13 +214,13 @@
                                     
                                     <td class="addBorder">
                                 
-                                    <a class="btn btn-editar" href="./crud/editarPessoa.jsp?id=<%=pe.getId()%>&nome=<%=pe.getNome()%>&bi=<%=pe.getNumbi()%>
-                                       &data=<%=pe.getDataNasc()%>&telefone=<%=pe.getTelefone()%>&email=<%=pe.getEmail()%>&sexo=<%=sexod%>
+                                    <a class="btn btn-editar" href="./crud/editarPessoa.jsp?id=<%=pe.getId()%>&nome=<%=pe.getNomeCompleto()%>&bi=<%=pe.getNumbi()%>
+                                       &data=<%=pe.getDataNasc()%>&sexo=<%=sexod%>
                                        &comuna=<%=descricao%>&bairro=<%=mora.getBairro()%>&rua=<%=mora.getRua()%>&casa=<%=mora.getnCasa()%>&estado=<%=estadoCivil%>">Editar</a>
                                        
                                        
-                                    <a class="btn btn-eliminar" href="./crud/eliminarPessoa.jsp?id=<%=pe.getId()%>&nome=<%=pe.getNome()%>&bi=<%=pe.getNumbi()%>
-                                       &data=<%=pe.getDataNasc()%>&telefone=<%=pe.getTelefone()%>&email=<%=pe.getEmail()%>&sexo=<%=sexod%>
+                                    <a class="btn btn-eliminar" href="./crud/eliminarPessoa.jsp?id=<%=pe.getId()%>&nome=<%=pe.getNomeCompleto()%>&bi=<%=pe.getNumbi()%>
+                                       &data=<%=pe.getDataNasc()%>&sexo=<%=sexod%>
                                        &comuna=<%=descricao%>&bairro=<%=mora.getBairro()%>&rua=<%=mora.getRua()%>&casa=<%=mora.getnCasa()%>&estado=<%=estadoCivil%>">Eliminar</a>
                                 
                                     </td>

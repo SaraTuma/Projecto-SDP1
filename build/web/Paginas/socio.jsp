@@ -23,10 +23,7 @@
         <script src="../Javascript/comum.js"></script>
     </head>
     <body>
-          <header>header
-
-        
-    </header>
+    
     <section class="principal">
         <section class="seccao-esquerda">
             <div class="title"><strong>Administração</strong></div>
@@ -38,6 +35,8 @@
                 <li class="link"><a href="filme.jsp">Filme</a></li>
                 <li class="link"><a href="filme-actor.jsp">Actores de Filmes</a></li>
                 <li class="link"><a href="alugar.jsp">Alugar</a></li>
+                <li class="link"><a href="telefone.jsp">Telefone</a></li>
+                <li class="link"><a href="email.jsp">Email</a></li>
             </ul>
         </section>
         <section class="seccao-direita">
@@ -69,7 +68,7 @@
                             ArrayList<Socio> socios = new SocioDao().findAll();
                             String nome, categoria;
                             for(Socio socio : socios) {
-                                nome = new PessoaDao().findId(socio.getPessoa()).getNome();
+                                nome = new PessoaDao().findId(socio.getPessoa()).getNomeCompleto();
                                 categoria = new CategoriaSocioDao().getDescricao(socio.getCategoria());
                               %>
                         <tr>
@@ -99,7 +98,7 @@
                                 ArrayList<Pessoa> pessoas = new PessoaDao().findAllNames();
                                 for(Pessoa pessoa : pessoas) {
                             %>
-                            <option ><%=pessoa.getNome()%></option>
+                            <option ><%=pessoa.getNomeCompleto()%></option>
                             <%}%>
                         </select>  
                         <label class="label-texto" for="categoria">Escolhe aaaaa Categoria</label>

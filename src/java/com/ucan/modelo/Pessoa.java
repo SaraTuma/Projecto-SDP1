@@ -13,16 +13,15 @@ import java.sql.Date;
  */
 public class Pessoa {
     private Integer id, estadoCivil, morada, sexo;
-    private String numbi, telefone, email, datacadastro, primeiroNome, ultimoNome, nomeCompleto;
-    private Date dataNasc;
+    private String numbi, primeiroNome, ultimoNome, nomeCompleto;
+    private Date dataNasc, dataCadastro;
 
-    public Pessoa(String primeiroNome,String ultimoNome, String numbi, Date dataNasc, String telefone, String email, Integer sexo, Integer estadoCivil, Integer morada) {
+    public Pessoa(String primeiroNome,String ultimoNome, String numbi, Date dataNasc,
+            Integer sexo, Integer estadoCivil, Integer morada) {
         this.primeiroNome = primeiroNome;
         this.ultimoNome = ultimoNome;
         this.numbi = numbi;
         this.dataNasc = dataNasc;
-        this.telefone = telefone;
-        this.email = email;
         this.sexo = sexo;
         this.estadoCivil = estadoCivil;
         this.morada = morada;
@@ -35,17 +34,14 @@ public class Pessoa {
     
 
     public Pessoa(Integer id, String primeiroNome,String ultimoNome, String numbi, 
-            Date dataNasc, String telefone, 
-            String email, Integer morada, Integer sexo, 
-            Integer estadoCivil, String datacadastro) {
+            Date dataNasc, Integer morada, Integer sexo, 
+            Integer estadoCivil, Date dataCadastro) {
         this.id = id;
         this.primeiroNome = primeiroNome;
         this.ultimoNome = ultimoNome;
         this.numbi = numbi;
         this.dataNasc = dataNasc;
-        this.telefone = telefone;
-        this.email = email;
-        this.datacadastro = datacadastro;
+        this.dataCadastro = dataCadastro;
         this.sexo = sexo;
         this.estadoCivil = estadoCivil;
         this.morada = morada;
@@ -54,12 +50,12 @@ public class Pessoa {
 
    
     
-    public String getDatacadastro() {
-        return datacadastro;
+    public Date getDatacadastro() {
+        return dataCadastro;
     }
 
-    public void setDatacadastro(String datacadastro) {
-        this.datacadastro = datacadastro;
+    public void setDatacadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 
     public String getPrimeiroNome() {
@@ -124,22 +120,6 @@ public class Pessoa {
         this.dataNasc = dataNasc;
     }
 
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Integer getSexo() {
         return sexo;
     }
@@ -168,7 +148,7 @@ public class Pessoa {
     public String toString() {
         return "Pessoa{" + "id=" + id + ", estadoCivil=" + estadoCivil + ", morada=" + morada + ", "
                 + "sexo=" + sexo + ", primeiro nome=" + primeiroNome + ", ultimo nome="+ultimoNome+", numbi=" + numbi + ", dataNasc=" + dataNasc + ", "
-                + "telefone=" + telefone + ", email=" + email + ", datacadastro=" + datacadastro + '}';
+                + ", datacadastro=" + dataCadastro + '}';
     }
     
     

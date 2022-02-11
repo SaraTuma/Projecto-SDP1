@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class Conexao
 {
-    private static final String URL = "jdbc:postgresql://localhost:5432/clube_videos";
+    private static final String URL = "jdbc:postgresql://localhost:5432/clube";
     private static final String USERNAME = "postgres";
     private static final String PASSWORD = "postgres";
     private static Connection co =null;

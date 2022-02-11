@@ -51,9 +51,7 @@ public class PessoaServlet extends HttpServlet {
             pessoa.setDataNasc(TratamentoDeDatas.converterDataNormalParaDataSQL(request.getParameter("dataNasc").trim()));
             
             pessoa.setNumbi(request.getParameter("bi").trim());
-            pessoa.setEmail(request.getParameter("email").trim());
             pessoa.setSexo(new SexoDao().getID(request.getParameter("sexo").trim()));
-            pessoa.setTelefone(request.getParameter("telefone").trim());
             pessoa.setEstadoCivil(new EstadoCivilDao().getID(request.getParameter("estadoCivil")));
            //Criando uma instancia para a morada
             Morada morada = new Morada(

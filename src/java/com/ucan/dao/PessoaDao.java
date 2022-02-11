@@ -32,17 +32,15 @@ public class PessoaDao {
             if(conexao!=null){
                 try {
                     String query = "select pk_pessoa from public.pessoa where nome=? and num_bi=? and data_nascimento=? and "
-                            + "telefone=? and email=? and fk_morada=? and fk_sexo=? and fk_estado_civil=?";
+                            + "fk_morada=? and fk_sexo=? and fk_estado_civil=?";
                     prepared = conexao.prepareStatement(query);
                     prepared.setString(1, pessoa.getPrimeiroNome());
                     prepared.setString(2, pessoa.getUltimoNome());
                     prepared.setString(3, pessoa.getNumbi());
                     prepared.setDate(4, pessoa.getDataNasc());
-                    prepared.setString(5, pessoa.getTelefone());
-                    prepared.setString(6, pessoa.getEmail());
-                    prepared.setInt(7, pessoa.getMorada());
-                    prepared.setInt(8, pessoa.getSexo());
-                    prepared.setInt(9, pessoa.getEstadoCivil());
+                    prepared.setInt(5, pessoa.getMorada());
+                    prepared.setInt(6, pessoa.getSexo());
+                    prepared.setInt(7, pessoa.getEstadoCivil());
                     result = prepared.executeQuery();
                     while(result.next()){
                        id = result.getInt("pk_pessoa");
@@ -60,15 +58,16 @@ public class PessoaDao {
         return id;
     }
     
-    public Integer getId(String nome){
-        Integer id=0;
+    public Integer getId(String pnome, String unome){
+        Integer id=-1;
         try {
             conexao = Conexao.getConexao();
             if(conexao!=null){
                 try {
-                    String query = "select pk_pessoa from public.pessoa where nome=?";
+                    String query = "select pk_pessoa from public.pessoa where pnome=? and unome=?";
                     prepared = conexao.prepareStatement(query);
-                    prepared.setString(1, nome);
+                    prepared.setString(1, pnome);
+                    prepared.setString(2, unome);
                     result = prepared.executeQuery();
                     if(result.next()){
                        id = result.getInt("pk_pessoa");
@@ -123,9 +122,8 @@ public class PessoaDao {
                 while(result.next()){
                     array.add(
                             new Pessoa(result.getInt(1), result.getString(2),result.getString(3), result.getString(4), 
-                                result.getDate(5), result.getString(6), 
-                                result.getString(7), result.getInt(8), result.getInt(9), 
-                                result.getInt(10), result.getString(11))
+                                result.getDate(5), result.getInt(6), result.getInt(7), 
+                                result.getInt(8), result.getDate(9))
                     );
                 }
                 
@@ -151,9 +149,8 @@ public class PessoaDao {
                 if(result.next()){
                    
                     pessoa = new Pessoa(result.getInt(1), result.getString(2),result.getString(3), result.getString(4), 
-                                result.getDate(5), result.getString(6), 
-                                result.getString(7), result.getInt(8), result.getInt(9), 
-                                result.getInt(10), result.getString(11))
+                                result.getDate(5), result.getInt(6), result.getInt(7), 
+                                result.getInt(8), result.getDate(9))
                     ;
                 }
                 
@@ -213,19 +210,15 @@ public class PessoaDao {
         try {
             conexao = Conexao.getConexao();
             if(conexao!=null){
-                String query = "INSERT INTO public.pessoa(\n" +
-"	nome, num_bi, data_nascimento, telefone, email, fk_morada, fk_sexo, fk_estado_civil)\n" +
-"	VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+                String query = "INSERT INTO public.pessoa(nome, num_bi, data_nascimento, fk_morada, fk_sexo, fk_estado_civil)VALUES (?, ?, ?, ?, ?, ?)";
                 prepared = conexao.prepareStatement(query);
                 prepared.setString(1, pessoa.getPrimeiroNome());
                 prepared.setString(2, pessoa.getUltimoNome());
                 prepared.setString(3, pessoa.getNumbi());
                 prepared.setDate(4, pessoa.getDataNasc());
-                prepared.setString(5, pessoa.getTelefone());
-                prepared.setString(6, pessoa.getEmail());
-                prepared.setInt(7, pessoa.getMorada());
-                prepared.setInt(8, pessoa.getSexo());
-                prepared.setInt(9, pessoa.getEstadoCivil());
+                prepared.setInt(5, pessoa.getMorada());
+                prepared.setInt(6, pessoa.getSexo());
+                prepared.setInt(7, pessoa.getEstadoCivil());
                 prepared.execute();
                 Conexao.fecharConexaoP(conexao, prepared);
                 r=true;
@@ -259,17 +252,15 @@ public class PessoaDao {
             conexao = Conexao.getConexao();
             if(conexao!=null){
                 String query = "DELETE from public.pessoa where nome=? and num_bi=? and "
-                        + "data_nascimento=? and telefone=? and email=? and fk_morada=? and fk_sexo=?, fk_estado_civil=?";
+                        + "data_nascimento=? and fk_morada=? and fk_sexo=?, fk_estado_civil=?";
                 prepared = conexao.prepareStatement(query);
                 prepared.setString(1, pessoa.getPrimeiroNome());
                 prepared.setString(2, pessoa.getUltimoNome());
                 prepared.setString(3, pessoa.getNumbi());
                 prepared.setDate(4, pessoa.getDataNasc());
-                prepared.setString(5, pessoa.getTelefone());
-                prepared.setString(6, pessoa.getEmail());
-                prepared.setInt(7, pessoa.getMorada());
-                prepared.setInt(8, pessoa.getSexo());
-                prepared.setInt(9, pessoa.getEstadoCivil());
+                prepared.setInt(5, pessoa.getMorada());
+                prepared.setInt(6, pessoa.getSexo());
+                prepared.setInt(7, pessoa.getEstadoCivil());
                 prepared.execute();
                 Conexao.fecharConexaoP(conexao, prepared);
                 return true;
@@ -300,7 +291,7 @@ public class PessoaDao {
         try {
             conexao = Conexao.getConexao();
             if(conexao!=null){
-                String query = "UPDATE public.pessoa SET nome=?, num_bi=?, data_nascimento=?, telefone=?, email=?,"
+                String query = "UPDATE public.pessoa SET nome=?, num_bi=?, data_nascimento=?,"
                         + " fk_morada=?, fk_sexo=?, fk_estado_civil=?"
                         + "WHERE pk_pessoa=?";
                 prepared = conexao.prepareStatement(query);
@@ -308,11 +299,9 @@ public class PessoaDao {
                 prepared.setString(2, pessoa.getUltimoNome());
                 prepared.setString(3, pessoa.getNumbi());
                 prepared.setDate(4, pessoa.getDataNasc());
-                prepared.setString(5, pessoa.getTelefone());
-                prepared.setString(6, pessoa.getEmail());
-                prepared.setInt(7, pessoa.getMorada());
-                prepared.setInt(8, pessoa.getSexo());
-                prepared.setInt(9, pessoa.getEstadoCivil());
+                prepared.setInt(5, pessoa.getMorada());
+                prepared.setInt(6, pessoa.getSexo());
+                prepared.setInt(7, pessoa.getEstadoCivil());
                 prepared.execute();
                 Conexao.fecharConexaoP(conexao, prepared);
                 return true;

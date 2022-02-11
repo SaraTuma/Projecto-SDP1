@@ -7,7 +7,6 @@ package com.ucan.dao;
 
 import com.ucan.utils.Conexao;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,6 +22,7 @@ import com.ucan.modelo.Actor;
 public class ActorDao {
     private Connection conexao;
     private PreparedStatement prepared;
+    private ResultSet result;
     
     public ArrayList<Actor> findAll(){
        ArrayList<Actor> array = new ArrayList<>();
@@ -32,7 +32,7 @@ public class ActorDao {
             if(conexao!=null){
                 String query = "select * from public.actor";
                 prepared = conexao.prepareStatement(query);
-                ResultSet result = prepared.executeQuery();
+                result = prepared.executeQuery();
                 while(result.next()){
                     array.add(new Actor(result.getInt(1), result.getInt(2), result.getDate(3)));
                 }
@@ -52,11 +52,11 @@ public class ActorDao {
             
             conexao = Conexao.getConexao();
             if(conexao!=null){
-                String query = "SELECT nome from public.pessoa inner join public.actor on pk_pessoa=fk_pessoa";
+                String query = "SELECT pnome, unome from public.pessoa inner join public.actor on pk_pessoa=fk_pessoa";
                 prepared = conexao.prepareStatement(query);
-                ResultSet result = prepared.executeQuery();
+                result = prepared.executeQuery();
                 while(result.next()){
-                    array.add(result.getString(1));
+                    array.add(result.getString(1) +" "+ result.getString(1));
                 }
                 
                 Conexao.fecharConexaoPR(conexao, prepared, result);
@@ -73,14 +73,13 @@ public class ActorDao {
             
             conexao = Conexao.getConexao();
             if(conexao!=null){
-                String query = "SELECT nome from public.pessoa inner join public.actor on pk_pessoa=fk_pessoa where fk_pessoa=?";
+                String query = "SELECT pnome, unome from public.pessoa inner join public.actor on pk_pessoa=fk_pessoa where fk_pessoa=?";
                 prepared = conexao.prepareStatement(query);
                 prepared.setInt(1, id);
-                ResultSet result = prepared.executeQuery();
-                while(result.next()){
-                    nome=result.getString(1);
+                result = prepared.executeQuery();
+                if(result.next()){
+                    nome=result.getString(1)+" "+result.getString(2);
                 }
-                
                 Conexao.fecharConexaoPR(conexao, prepared, result);
             }
         } catch (ClassNotFoundException | SQLException ex) {
