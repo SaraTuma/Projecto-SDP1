@@ -3,44 +3,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/servlet/EditarTelefone.java</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/crud/eliminarActor.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/crud/editarEmail.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Css/comum.css</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/crud/editarPessoa.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Css/pessoa.css</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/realizador.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/actor.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/crud/eliminarSocio.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/TelefoneDao.java</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/crud/eliminarEmail.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/pessoa.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/servlet/CadastrarPessoa.java</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/modelo/Pessoa.java</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/servlet/EditarEmail.java</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/servlet/EditarSocio.java</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/filme-actor.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/crud/eliminarTelefone.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/email.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/crud/eliminarPessoa.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/alugar.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/modelo/Telefone.java</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/telefone.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/servlet/EliminarTelefone.java</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/servlet/CadastrarTelefone.java</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/utils/FuncaoAuxiliar.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/PessoaDao.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/ClassificacaoDao.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/ActorDao.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/AlugarDao.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/CategoriaSocioDao.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/modelo/Alugar.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/MunicipioDao.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/modelo/Actor.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/SocioDao.java</file>
             <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/TesteDao.java</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/crud/editarSocio.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/servlet/EliminarEmail.java</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/crud/editarTelefone.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/crud/editarActor.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/filme.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/servlet/CadastrarEmail.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/ProvinciaDao.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/FilmeActorDao.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/MoradaDao.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/ComunaDao.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/TelefoneDao.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/RealizadorDao.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/DefesaDao.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/GeneroDao.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/EstadoCivilDao.java</file>
+            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/FilmeDao.java</file>
             <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/dao/EmailDao.java</file>
             <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/socio.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/src/java/com/ucan/modelo/Auxiliar.java</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/crud/eliminarFilme.jsp</file>
-            <file>file:/home/saratuma/NetBeansProjects/Clube-SaraTuma/web/Paginas/crud/editarFilme.jsp</file>
         </group>
     </open-files>
 </project-private>

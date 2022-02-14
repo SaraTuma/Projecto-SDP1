@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ucan.dao;
 
 import com.ucan.modelo.Email;
@@ -74,6 +69,24 @@ public class EmailDao {
                 prepared.setString(1, email.getDescricao());
                 prepared.setInt(2, email.getPessoa());
                 prepared.setInt(3, email.getId());
+                prepared.execute();
+                Conexao.fecharConexaoP(conexao, prepared);
+                return true;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(EmailDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    
+     public boolean delete(Integer id){    
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "delete from email where pk_email=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
                 prepared.execute();
                 Conexao.fecharConexaoP(conexao, prepared);
                 return true;

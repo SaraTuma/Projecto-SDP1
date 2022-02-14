@@ -5,21 +5,18 @@
  */
 package com.ucan.modelo;
 
+import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
 
 /**
  *
  * @author saratuma
  */
 public class Filme {
-    private Integer id, anoPublicado;
+    private Integer id, anoPublicado, genero, classificacao, realizador;
     private String tituloPort, tituloOrig, sinopse;
-    private Timestamp dataCadastro;
-    private Integer realizador;
+    private Date dataCadastro;
     private Time duracao;
-    private Integer classificacao;
-    private Integer genero;
 
     public Filme(String tituloPort, String tituloOrig, String sinopse, 
             Time duracao, Integer realizador, Integer classificacao, 
@@ -36,7 +33,7 @@ public class Filme {
 
     public Filme(Integer id, String tituloPort, String tituloOrig, String sinopse, 
              Time duracao, Integer realizador, 
-            Integer classificacao, Integer genero,Timestamp dataCadastro, Integer anoPublicado) {
+            Integer classificacao, Integer genero,Date dataCadastro, Integer anoPublicado) {
         this.id = id;
         this.tituloPort = tituloPort;
         this.tituloOrig = tituloOrig;
@@ -57,11 +54,11 @@ public class Filme {
         this.anoPublicado = anoPublicado;
     }
     
-    public Timestamp getDataCadastro() {
+    public Date getDataCadastro() {
         return dataCadastro;
     }
 
-    public void setDataCadastro(Timestamp dataCadastro) {
+    public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
     

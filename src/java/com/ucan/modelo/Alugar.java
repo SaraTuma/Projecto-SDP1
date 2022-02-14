@@ -12,13 +12,11 @@ import java.sql.Date;
  * @author saratuma
  */
 public class Alugar {
-    private Integer id;
-    private String dataAlugar, dataDevolucao, dataCadastro;
-    private Socio socio;
-    private Filme filme;
+    private Integer id, socio, filme;
+    private Date dataAlugar, dataDevolucao, dataCadastro;
 
-    public Alugar(Integer id, String dataAlugar, String dataDevolucao, Socio socio, 
-            Filme filme, String dataCadastro) {
+    public Alugar(Integer id, Date dataAlugar, Date dataDevolucao, Integer socio, 
+            Integer filme, Date dataCadastro) {
         this.id = id;
         this.dataAlugar = dataAlugar;
         this.dataDevolucao = dataDevolucao;
@@ -27,11 +25,29 @@ public class Alugar {
         this.dataCadastro = dataCadastro;
     }
 
-    public Alugar(String dataAlugar, String dataDevolucao, Socio socio, Filme filme) {
+    public Alugar(Date dataAlugar, Date dataDevolucao, Integer socio, Integer filme) {
         this.dataAlugar = dataAlugar;
         this.dataDevolucao = dataDevolucao;
         this.socio = socio;
         this.filme = filme;
+    }
+
+    public Alugar(Date dataAlugar, Date dataDevolucao,Integer socio, Integer filme, Date dataCadastro) {
+        this.socio = socio;
+        this.filme = filme;
+        this.dataAlugar = dataAlugar;
+        this.dataDevolucao = dataDevolucao;
+        this.dataCadastro = dataCadastro;
+    }
+    
+    
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 
     
@@ -44,36 +60,36 @@ public class Alugar {
         this.id = id;
     }
 
-    public String getDataAlugar() {
+    public Date getDataAlugar() {
         return dataAlugar;
     }
 
-    public void setDataAlugar(String dataAlugar) {
+    public void setDataAlugar(Date dataAlugar) {
         this.dataAlugar = dataAlugar;
     }
 
-    public String getDataDevolucao() {
+    public Date getDataDevolucao() {
         return dataDevolucao;
     }
 
-    public void setDataDevolucao(String dataDevolucao) {
+    public void setDataDevolucao(Date dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
 
     
-    public Socio getSocio() {
+    public Integer getSocio() {
         return socio;
     }
 
-    public void setSocio(Socio socio) {
+    public void setSocio(Integer socio) {
         this.socio = socio;
     }
 
-    public Filme getFilme() {
+    public Integer getFilme() {
         return filme;
     }
 
-    public void setFilme(Filme filme) {
+    public void setFilme(Integer filme) {
         this.filme = filme;
     }
     

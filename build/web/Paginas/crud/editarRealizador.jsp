@@ -1,5 +1,5 @@
 <%-- 
-    Document   : editarActor
+    Document   : editarRealizador
     Created on : 17/jan/2022, 3:15:38
     Author     : saratuma
 --%>
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Editar Actor</title>
+        <title>Editar Realizador</title>
         <link rel="stylesheet" href="../../Css/comum.css">
         <style> 
             .btn{
@@ -53,17 +53,17 @@
         </section>
         <section class="seccao-direita">
         <section id="seccao-3" class="seccao-editar">
-                <h1 class="h1-title">Editar dados de um Actor</h1>
-                <form id="formEditar" class="form-Style formEditar" action="../../EditarActor" method="post" >
+                <h1 class="h1-title">Editar dados de um Realizador</h1>
+                <form id="formEditar" class="form-Style formEditar" action="../../editarRealizador" method="post" >
                     
-                        <label class="label-texto" for="nome">Nome do Actor</label>
+                        <label class="label-texto" for="nome">Nome do Realizador</label>
                         <input type="text" name="nome" disabled="disabled" value="<%=request.getParameter("nome") %>"> 
                         <br>
                         <label class="label-texto" for="dataCadastro">Data de Cadastro</label>
                         <input type="date" name="dataCadastro" value="<%=request.getParameter("data") %>">
                         <br>
                         <input type="submit" class="btn button-enviar" value="Editar">
-                        <a class="button-enviar btn btn-eliminar" href="../actor.jsp">Cancelar</a>
+                        <a class="button-enviar btn btn-eliminar" href="../realizador.jsp">Cancelar</a>
                     
                 </form>
             </section>

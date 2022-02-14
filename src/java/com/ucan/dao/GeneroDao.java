@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.ucan.dao;
 
 import com.ucan.utils.Conexao;
@@ -21,6 +17,8 @@ import com.ucan.modelo.Genero;
  */
 public class GeneroDao {
     private Connection conexao;
+    private PreparedStatement prepared;
+    private ResultSet result;
     
     public ArrayList<Genero> findAll() {
         ArrayList<Genero> array = new ArrayList<Genero>();
@@ -29,20 +27,36 @@ public class GeneroDao {
             conexao = Conexao.getConexao();
             if(conexao!=null){
                 String query = "select * from genero";
-                PreparedStatement prepared = conexao.prepareStatement(query);
-                ResultSet result = prepared.executeQuery();
+                prepared = conexao.prepareStatement(query);
+                result = prepared.executeQuery();
                 while(result.next()){
                     array.add(new Genero(result.getInt(1), result.getString(2)));
                 }
                 
                 Conexao.fecharConexaoPR(conexao, prepared, result);
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return array;
 
+    }
+    
+    
+     public boolean delete(Integer id){    
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "delete from genero where pk_genero=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                prepared.execute();
+                Conexao.fecharConexaoP(conexao, prepared);
+                return true;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 }

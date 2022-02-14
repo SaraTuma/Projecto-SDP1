@@ -114,6 +114,26 @@ public class TelefoneDao {
         return false;
     }
     
+    
+    public boolean updateDescricao(Telefone telefone){        
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "UPDATE public.telefone SET descricao=? WHERE fk_pessoa=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setString(1, telefone.getDescricao());
+                prepared.setInt(2, telefone.getPessoa());
+                prepared.execute();
+                Conexao.fecharConexaoP(conexao, prepared);
+                return true;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(TelefoneDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    
     public ArrayList<Auxiliar> buscarTelefonesPorPessoa(Integer pk_pessoa){   
         ArrayList<Auxiliar> array = new ArrayList<>();
         try {
@@ -136,5 +156,22 @@ public class TelefoneDao {
             Logger.getLogger(TelefoneDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return array;
+    }
+    
+    public boolean delete(Integer id){    
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "delete from telefone where pk_telefone=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                prepared.execute();
+                Conexao.fecharConexaoP(conexao, prepared);
+                return true;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(TelefoneDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 }

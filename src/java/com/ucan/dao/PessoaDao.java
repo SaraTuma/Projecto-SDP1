@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.ucan.dao;
 
 import com.ucan.utils.Conexao;
@@ -135,7 +131,82 @@ public class PessoaDao {
         return array;
     }
     
-    
+     public ArrayList<Pessoa> findAllPersonNotActors() {
+       ArrayList<Pessoa> array = new ArrayList<>();
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "select pk_pessoa, pnome, unome from pessoa left join actor on pk_pessoa=fk_pessoa where fk_pessoa is null;";
+                prepared = conexao.prepareStatement(query);
+                result = prepared.executeQuery();
+                
+                while(result.next()){
+                    Pessoa pessoa=new Pessoa();
+                    pessoa.setId(result.getInt(1));
+                    pessoa.setPrimeiroNome(result.getString(2));
+                    pessoa.setUltimoNome(result.getString(3));
+                    array.add(pessoa);
+                }
+                
+                Conexao.fecharConexaoPR(conexao, prepared, result);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return array;
+    }
+     
+     
+      public ArrayList<Pessoa> findAllPersonNotSocio() {
+       ArrayList<Pessoa> array = new ArrayList<>();
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "select pk_pessoa, pnome, unome from pessoa left join socio on pk_pessoa=fk_pessoa where fk_pessoa is null;";
+                prepared = conexao.prepareStatement(query);
+                result = prepared.executeQuery();
+                
+                while(result.next()){
+                    Pessoa pessoa=new Pessoa();
+                    pessoa.setId(result.getInt(1));
+                    pessoa.setPrimeiroNome(result.getString(2));
+                    pessoa.setUltimoNome(result.getString(3));
+                    array.add(pessoa);
+                }
+                
+                Conexao.fecharConexaoPR(conexao, prepared, result);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return array;
+    }
+      
+      
+      public ArrayList<Pessoa> findAllPersonNotRealizador() {
+       ArrayList<Pessoa> array = new ArrayList<>();
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "select pk_pessoa, pnome, unome from pessoa left join realizador on pk_pessoa=fk_pessoa where fk_pessoa is null;";
+                prepared = conexao.prepareStatement(query);
+                result = prepared.executeQuery();
+                
+                while(result.next()){
+                    Pessoa pessoa=new Pessoa();
+                    pessoa.setId(result.getInt(1));
+                    pessoa.setPrimeiroNome(result.getString(2));
+                    pessoa.setUltimoNome(result.getString(3));
+                    array.add(pessoa);
+                }
+                
+                Conexao.fecharConexaoPR(conexao, prepared, result);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return array;
+    }
       
     public Pessoa findId(Integer id) {
        Pessoa pessoa=null;

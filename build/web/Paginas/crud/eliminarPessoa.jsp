@@ -44,6 +44,8 @@
                 <li class="link"><a href="../filme.jsp">Filme</a></li>
                 <li class="link"><a href="../filme-actor.jsp">Actores de Filmes</a></li>
                 <li class="link"><a href="../alugar.jsp">Alugar</a></li>
+                <li class="link"><a href="../telefone.jsp">Telefone</a></li>
+                <li class="link"><a href="../email.jsp">Email</a></li>
             </ul>
         </section>
         <section class="seccao-direita">

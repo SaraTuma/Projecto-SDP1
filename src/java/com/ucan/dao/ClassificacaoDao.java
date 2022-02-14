@@ -21,25 +21,23 @@ import com.ucan.modelo.Classificacao;
  */
 public class ClassificacaoDao {
     private Connection conexao;
+    private PreparedStatement prepared;
+    private ResultSet result;
     
     public ArrayList<Classificacao> findAll() {
        ArrayList<Classificacao> array = new ArrayList<Classificacao>();
         try {
-            
             conexao = Conexao.getConexao();
             if(conexao!=null){
                 String query = "select * from classificacao";
-                PreparedStatement prepared = conexao.prepareStatement(query);
-                ResultSet result = prepared.executeQuery();
+                prepared = conexao.prepareStatement(query);
+                result = prepared.executeQuery();
                 while(result.next()){
                     array.add(new Classificacao(result.getInt(1), result.getString(2)));
                 }
-                
                 Conexao.fecharConexaoPR(conexao, prepared, result);
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ClassificacaoDao.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ClassificacaoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return array;

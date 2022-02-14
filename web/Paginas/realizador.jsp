@@ -1,10 +1,16 @@
 <%-- 
-    Document   : realizador
-    Created on : 6/jan/2022, 3:09:10
+    Document   : realizador.jsp
+    Created on : 14/jan/2022, 9:55:43
     Author     : saratuma
 --%>
 
+<%@page import="com.ucan.modelo.Realizador"%>
+<%@page import="com.ucan.dao.RealizadorDao"%>
+<%@page import="com.ucan.dao.PessoaDao"%>
+<%@page import="com.ucan.modelo.Pessoa"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,20 +19,29 @@
         <link rel="stylesheet" href="../Css/comum.css" /> 
         <link rel="stylesheet" href="../Css/actor-realizador.css" /> 
         <script src="../Javascript/comum.js"></script>
+        <style>
+            .btn{
+                    background-color: green;
+                    border: none; padding: 0.5rem; color: white; border-radius: 0.5rem; 
+                    font-weight: 1.2rem;
+                    text-decoration: none;
+                    cursor: pointer;
+            }
+            .btn-eliminar{
+                background-color: red;
+            }
+        </style>
     </head>
     <body>
-        
     
     <section class="principal">
         <section class="seccao-esquerda">
             <div class="title"><strong>Administração</strong></div>
             <ul class="lista-esquerda">
-                <li class="link"><a href="pessoa.jsp">Pessoa</a>
+                <li class="link"><a href="pessoa.jsp">Pessoa</a></li>
+                <li class="link"><a class="active" href="actor.jsp">Actor</a>
                 </li>
-                <li class="link"><a href="actor.jsp">Actor</a></li>
-                <li class="link"> <a  class="active" href="#">Realizador</a>
-                    
-                </li>
+                <li class="link"> <a href="#">Realizador</a></li>
                 <li class="link"><a href="socio.jsp">Socio</a></li>
                 <li class="link"><a href="filme.jsp">Filme</a></li>
                 <li class="link"><a href="filme-actor.jsp">Actores de Filmes</a></li>
@@ -35,86 +50,76 @@
                 <li class="link"><a href="email.jsp">Email</a></li>
             </ul>
         </section>
-       
+        <section class="seccao-direita">
+            <section class="seccao-direita-1">
+           
+           
+        </section>
+
         <section class="seccao-direita">
            
             <section id="seccao-1" class="seccao-esquerda-2">
                 <h1 class="h1-title">Todos os Realizadores do Clube</h1>
+                <button class="btn btn-editar" onclick="mostrarSeccaoCadastrar()">Cadastrar</button>
+                <br>
+                 <p class="p-erro">
+                         <%
+                             String r=request.getParameter("erro") ;
+                             String b=r+"ab";
+                             if(! b.equals("nullab")){
+                                out.println(r);
+                             }
+                         %>
+                </p> 
                 <table>
                     <thead>
                         <tr>
                             <td class="addBorder"><strong>Nome</strong></td>
                             <td class="addBorder"><strong>Data de cadastro</strong></td>
-                           
+                            <td class="addBorder"><strong>Operação</strong></td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="addBorder">Sara Tuma</td>
-                            <td class="addBorder">29-04-2010</td>
-                        </tr>
-                        <tr>
-                            <td class="addBorder">Isaura Manico</td>
-                            <td class="addBorder">29-04-2010</td>
-                            
-                        </tr>
-
-                        <tr>
-                            <td class="addBorder">Creuma Kuzola</td>
-                            <td class="addBorder">29-04-2010</td>
-                            
-                        </tr>
-                        <tr>
-                            <td class="addBorder">Eufranio Diogo</td>
-                            <td class="addBorder">29-04-2010</td>
-                        </tr>
+                            <%
+                               
+                                String nome=null;
+                                for(Realizador realizador :  new RealizadorDao().findAll()){
+                                    
+                                    nome = new RealizadorDao().getPessoaNome(realizador.getPessoa());
+                                    %>
+                                    <tr>
+                                        <td class="addBorder"><%=nome%></td>
+                                        <td class="addBorder"><%=realizador.getDataCadastro()%></td>
+                                        <td>
+                                            <a class="btn btn-editar" href="./crud/editarActor.jsp?nome=<%=nome%>&data=<%=realizador.getDataCadastro()%>">Editar</a>
+                                            <a class="btn btn-eliminar" href="./crud/eliminarActor.jsp?nome=<%=nome%>&data=<%=realizador.getDataCadastro()%>&id=<%=realizador.getId()%>">Eliminar</a>
+                                        </td>
+                                    </tr>
+                            <%
+                                }
+                            %>         
                     </tbody>
                 </table>
             </section>
             <section id="seccao-2" class="seccao-cadastro">
                 <h1 class="h1-title">Cadastrar um Realizador</h1>
-                <form id="formCadastro" class="form-Style formCadastro" action="" method="post" >
+                <form id="formCadastro" class="form-Style formCadastro" action="../CadastrarRealizador" method="POST" >
                     
-                        <label class="label-texto" for="actor">Escolhe o Realizador</label>
+                        <label class="label-texto" for="actor">Escolhe o Actor</label>
                         <select name="actor">
-                            <option value="">Sara Tuma</option>
-                            <option value="">Isaura Manico</option>
-                            <option value="">Marilda Sungu</option>
-                            <option value="">Creuma Kuzola</option>
+                            <%
+                            for(Pessoa pessoa : new PessoaDao().findAllPersonNotRealizador()){
+                            %>
+                            <option ><%=pessoa.getNomeCompleto()%></option>
+                            <%
+                            }
+                            %>
+                            
+                            
                         </select>                     
                         <input type="submit" class="button-enviar" value="Cadastrar">
+                        <a class="btn btn-eliminar" href="realizador.jsp">Cancelar</a>
                     
-                </form>
-            </section>
-            <section id="seccao-3" class="seccao-editar">
-                <h1 class="h1-title">Editar dados de um Realizador</h1>
-                <form id="formEditar" class="form-Style formEditar" action="" method="post" >
-                    
-                    <label class="label-texto" for="actor">Escolhe o Realizador</label>
-                        <select name="actor">
-                            <option value="">Sara Tuma</option>
-                            <option value="">Isaura Manico</option>
-                            <option value="">Marilda Sungu</option>
-                            <option value="">Creuma Kuzola</option>
-                        </select>
-                        <label class="label-texto" for="data_cadastro">Data de Cadastro</label>
-                        <input type="date" name="data_cadastro" id="data_cadastro">                      
-                       
-                        <input type="submit" class="button-enviar" value="Editar">
-                    
-                </form>
-            </section>
-            <section id="seccao-4" class="seccao-eliminar">
-                <h1 class="h1-title">Eliminar um Realizador</h1>
-                <form id="formEditar" class="form-Style form-eliminar" action="" method="post" >
-                    <label class="label-texto" for="pessoa">Escolhe o Realizador</label>
-                    <select name="actor">
-                        <option value="">Sara Tuma</option>
-                        <option value="">Isaura Manico</option>
-                        <option value="">Marilda Sungu</option>
-                        <option value="">Creuma Kuzola</option>
-                    </select>
-                    <input type="submit" class="button-enviar" value="Eliminar">
                 </form>
             </section>
         </section>

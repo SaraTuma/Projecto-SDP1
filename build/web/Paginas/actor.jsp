@@ -4,6 +4,8 @@
     Author     : saratuma
 --%>
 
+<%@page import="com.ucan.dao.PessoaDao"%>
+<%@page import="com.ucan.modelo.Pessoa"%>
 <%@page import="com.ucan.modelo.Actor"%>
 <%@page import="com.ucan.dao.ActorDao"%>
 <%@page import="java.util.ArrayList"%>
@@ -101,14 +103,22 @@
             </section>
             <section id="seccao-2" class="seccao-cadastro">
                 <h1 class="h1-title">Cadastrar um Actor</h1>
-                <form id="formCadastro" class="form-Style formCadastro" action="" method="POST" >
+                <form id="formCadastro" class="form-Style formCadastro" action="../CadastrarActor" method="POST" >
                     
                         <label class="label-texto" for="actor">Escolhe o Actor</label>
                         <select name="actor">
-                            <option >Sara Tuma</option>
+                            <%
+                            for(Pessoa pessoa : new PessoaDao().findAllPersonNotActors()){
+                            %>
+                            <option ><%=pessoa.getNomeCompleto()%></option>
+                            <%
+                            }
+                            %>
+                            
                             
                         </select>                     
                         <input type="submit" class="button-enviar" value="Cadastrar">
+                        <button class="btn btn-eliminar" onclick="mostrarSeccaoVisualizar()()">Cancelar</button>
                     
                 </form>
             </section>

@@ -70,4 +70,21 @@ public class SocioDao {
         return false;
         
     }
+       
+      public boolean delete(Integer id){    
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "delete from socio where pk_socio=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                prepared.execute();
+                Conexao.fecharConexaoP(conexao, prepared);
+                return true;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(SocioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }

@@ -22,16 +22,17 @@ import com.ucan.modelo.Municipio;
 public class MunicipioDao {
      private Connection conexao;
      private PreparedStatement prepared;
+     private ResultSet result;
     
     public ArrayList<Municipio> findAll(){
-       ArrayList<Municipio> array = new ArrayList<Municipio>();
+       ArrayList<Municipio> array = new ArrayList<>();
         try {
             conexao = Conexao.getConexao();
             if(conexao!=null){
                 try {
                     String query = "select * from municipio";
                     prepared = conexao.prepareStatement(query);
-                    ResultSet result = prepared.executeQuery();
+                    result = prepared.executeQuery();
                     while(result.next()){
                         array.add(new Municipio(result.getInt(1), result.getString(2)));
                     }
@@ -58,7 +59,7 @@ public class MunicipioDao {
                     String query = "select descricao from public.municipio where pk_municipio=?";
                     prepared = conexao.prepareStatement(query);
                     prepared.setInt(1, id);
-                    ResultSet result = prepared.executeQuery();
+                    result = prepared.executeQuery();
                     while(result.next()){
                         descricao=result.getString("descricao");
                     }
@@ -83,7 +84,7 @@ public class MunicipioDao {
                     String query = "select * from public.municipio where pk_municipio=?";
                     prepared = conexao.prepareStatement(query);
                     prepared.setInt(1, id);
-                    ResultSet result = prepared.executeQuery();
+                    result = prepared.executeQuery();
                     while(result.next()){
                        municipio = new Municipio(result.getInt(1), result.getString(2), result.getInt(3));
                     }

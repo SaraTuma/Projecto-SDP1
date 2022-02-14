@@ -80,9 +80,7 @@ public class SexoDao {
     
     
     public ArrayList<Sexo> findAll(){
-        
        ArrayList<Sexo> array = new ArrayList<>();
-       
         try {
             conexao = Conexao.getConexao();
             if(conexao!=null){
@@ -93,7 +91,6 @@ public class SexoDao {
                     while(result.next()){
                         array.add(new Sexo(result.getInt(1), result.getString(2)));
                     }
-                    
                     Conexao.fecharConexaoPR(conexao, prepared, result);
                 } catch (SQLException ex) {
                     Logger.getLogger(SexoDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -102,7 +99,6 @@ public class SexoDao {
             
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(SexoDao.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("ERRRRRRO");
         }
         return array;
     }

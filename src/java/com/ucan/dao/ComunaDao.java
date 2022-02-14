@@ -124,4 +124,23 @@ public class ComunaDao {
         }
         return comuna;
     }
+    
+    
+      public boolean delete(Integer id){    
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "delete from comuna where pk_comuna=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                prepared.execute();
+                Conexao.fecharConexaoP(conexao, prepared);
+                return true;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ComunaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
 }

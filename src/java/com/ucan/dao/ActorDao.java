@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ucan.dao;
 
 import com.ucan.utils.Conexao;
@@ -88,8 +83,115 @@ public class ActorDao {
         return nome;
     }
     
+        public boolean insert( Actor actor){  
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "INSERT INTO public.actor(fk_pessoa)VALUES (?)";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, actor.getPessoa());
+                prepared.execute();
+                Conexao.fecharConexaoP(conexao, prepared);
+                return true;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ActorDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+        
+    }
+    
+        
+    public boolean insertDataCadastro( Actor actor){  
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "INSERT INTO public.actor(fk_pessoa, data_cadastro)VALUES (?, ?)";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, actor.getPessoa());
+                prepared.setDate(2, actor.getDataCadastro());
+                prepared.execute();
+                Conexao.fecharConexaoP(conexao, prepared);
+                return true;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ActorDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+        
+    }  
     
     
-    //fazer o crud completo
-    // fazer um metodo que retorna uma pessoa que é actor - dados completos
+    public boolean update(Actor actor){        
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "UPDATE public.actor SET fk_pessoa=? WHERE pk_actor=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, actor.getPessoa());
+                prepared.setInt(2, actor.getId());
+
+                prepared.execute();
+                Conexao.fecharConexaoP(conexao, prepared);
+                return true;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ActorDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean updateDataCdastro(Actor actor){        
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "UPDATE public.actor SET fk_pessoa=?, data_cadastro=? WHERE pk_actor=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, actor.getPessoa());
+                prepared.setDate(2, actor.getDataCadastro());
+                prepared.setInt(3, actor.getId());
+                prepared.execute();
+                Conexao.fecharConexaoP(conexao, prepared);
+                return true;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ActorDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+      
+    public boolean delete(Integer id){    
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "delete from actor where pk_actor=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                prepared.execute();
+                Conexao.fecharConexaoP(conexao, prepared);
+                return true;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ActorDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean deleteByPessoa(Integer id){    
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "delete from actor where fk_pessoa=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                prepared.execute();
+                Conexao.fecharConexaoP(conexao, prepared);
+                return true;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ActorDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
 }

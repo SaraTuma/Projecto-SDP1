@@ -183,4 +183,22 @@ public class MoradaDao {
         }
         return false;
     }
+    
+    
+      public boolean delete(Integer id){    
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "delete from morada where pk_morada=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                prepared.execute();
+                Conexao.fecharConexaoP(conexao, prepared);
+                return true;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(MoradaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }

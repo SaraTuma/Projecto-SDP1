@@ -64,6 +64,18 @@
         <servlet-name>EliminarTelefone</servlet-name>
         <servlet-class>com.servlet.EliminarTelefone</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditarActor</servlet-name>
+        <servlet-class>com.servlet.EditarActor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CadastrarActor</servlet-name>
+        <servlet-class>com.servlet.CadastrarActor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CadastrarRealizador</servlet-name>
+        <servlet-class>com.servlet.CadastrarRealizador</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EditarPessoa</servlet-name>
         <url-pattern>/EditarPessoa</url-pattern>
@@ -127,6 +139,18 @@
     <servlet-mapping>
         <servlet-name>EliminarTelefone</servlet-name>
         <url-pattern>/EliminarTelefone</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditarActor</servlet-name>
+        <url-pattern>/EditarActor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CadastrarActor</servlet-name>
+        <url-pattern>/CadastrarActor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CadastrarRealizador</servlet-name>
+        <url-pattern>/CadastrarRealizador</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

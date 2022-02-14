@@ -5,39 +5,52 @@
  */
 package com.ucan.modelo;
 
+import java.sql.Date;
+
 /**
  *
  * @author saratuma
  */
 public class FilmeActor {
-    private Filme filme;
-    private Actor actor;
-    private String dataCadastro;
+    private Integer filme, actor;
+    private Date dataCadastro;
 
-    public FilmeActor(Filme filme, Actor actor) {
+    public FilmeActor(Integer filme, Integer actor) {
         this.filme = filme;
         this.actor = actor;
     }
-    public FilmeActor(Filme filme, Actor actor, String dataCadastro) {
+
+    public FilmeActor(Integer filme, Integer actor, Date dataCadastro) {
         this.filme = filme;
         this.actor = actor;
         this.dataCadastro = dataCadastro;
     }
-    public Filme getFilme() {
+
+    public Integer getFilme() {
         return filme;
     }
 
-    public void setFilme(Filme filme) {
+    public void setFilme(Integer filme) {
         this.filme = filme;
     }
 
-    public Actor getActor() {
+    public Integer getActor() {
         return actor;
     }
 
-    public void setActor(Actor actor) {
+    public void setActor(Integer actor) {
         this.actor = actor;
     }
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    
     
     
 }
