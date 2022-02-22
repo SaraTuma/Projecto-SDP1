@@ -40,11 +40,13 @@ public class EditarEmail extends HttpServlet {
             if(verificarCampos(request)){
                 Email email = new Email();
                 email.setDescricao(request.getParameter("email").trim());
-                String[] nome = request.getParameter("pessoa").trim().split(" ");
-                Integer pId = Integer.parseInt(request.getParameter("id").trim());
+                String[] nome = request.getParameter("nomePessoa").trim().split(" ");
+                Integer pId = new PessoaDao().getId(nome[0], nome[1]);
+                Integer emailId = Integer.parseInt(request.getParameter("id").trim());
                 Pessoa pessoaAlterar = new PessoaDao().findId(pId);
-                if(pessoaAlterar!=null){
+                if(pessoaAlterar!=null && new EmailDao().verifyId(emailId)){
                     email.setPessoa(pId);
+                    email.setId(emailId);
                     if(new EmailDao().update(email)){
                         mensagem = "Email de "+nome[0]+" "+ nome[1]+", editado com sucesso!!";
                     }
@@ -52,7 +54,7 @@ public class EditarEmail extends HttpServlet {
                         mensagem = "Erro: ao editar um Email!!";
                 }
                 else
-                    mensagem = "Erro: Código de pessoa invalida!!!";
+                    mensagem = "Erro: Códigos enviados invalidos!!!";
             }
             else
                 mensagem = "Erro: campos inválidos!!";
@@ -61,7 +63,7 @@ public class EditarEmail extends HttpServlet {
     }
     
     public boolean verificarCampos(HttpServletRequest request){
-        if(request.getParameter("email").trim() != null && request.getParameter("pessoa").trim()!=null && request.getParameter("id").trim()!=null)
+        if(request.getParameter("email").trim() != null && request.getParameter("nomePessoa").trim()!=null && request.getParameter("id").trim()!=null)
             return true;
         return false;
     }

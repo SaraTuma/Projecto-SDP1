@@ -26,26 +26,22 @@ public class PessoaDao {
         try {
             conexao = Conexao.getConexao();
             if(conexao!=null){
-                try {
-                    String query = "select pk_pessoa from public.pessoa where nome=? and num_bi=? and data_nascimento=? and "
-                            + "fk_morada=? and fk_sexo=? and fk_estado_civil=?";
-                    prepared = conexao.prepareStatement(query);
-                    prepared.setString(1, pessoa.getPrimeiroNome());
-                    prepared.setString(2, pessoa.getUltimoNome());
-                    prepared.setString(3, pessoa.getNumbi());
-                    prepared.setDate(4, pessoa.getDataNasc());
-                    prepared.setInt(5, pessoa.getMorada());
-                    prepared.setInt(6, pessoa.getSexo());
-                    prepared.setInt(7, pessoa.getEstadoCivil());
-                    result = prepared.executeQuery();
-                    while(result.next()){
-                       id = result.getInt("pk_pessoa");
-                    }
-                    
-                    Conexao.fecharConexaoPR(conexao, prepared, result);
-                } catch (SQLException ex) {
-                    Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
+                String query = "select pk_pessoa from public.pessoa where pnome=? and unome=? and num_bi=? and data_nascimento=? and "
+                        + "fk_morada=? and fk_sexo=? and fk_estado_civil=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setString(1, pessoa.getPrimeiroNome());
+                prepared.setString(2, pessoa.getUltimoNome());
+                prepared.setString(3, pessoa.getNumbi());
+                prepared.setDate(4, pessoa.getDataNasc());
+                prepared.setInt(5, pessoa.getMorada());
+                prepared.setInt(6, pessoa.getSexo());
+                prepared.setInt(7, pessoa.getEstadoCivil());
+                result = prepared.executeQuery();
+                while(result.next()){
+                   id = result.getInt("pk_pessoa");
                 }
+
+                Conexao.fecharConexaoPR(conexao, prepared, result);
             }
             
         } catch (ClassNotFoundException | SQLException ex) {
@@ -54,12 +50,13 @@ public class PessoaDao {
         return id;
     }
     
+    
     public Integer getId(String pnome, String unome){
         Integer id=-1;
         try {
             conexao = Conexao.getConexao();
             if(conexao!=null){
-                try {
+                
                     String query = "select pk_pessoa from public.pessoa where pnome=? and unome=?";
                     prepared = conexao.prepareStatement(query);
                     prepared.setString(1, pnome);
@@ -70,9 +67,7 @@ public class PessoaDao {
                     }
                     
                     Conexao.fecharConexaoPR(conexao, prepared, result);
-                } catch (SQLException ex) {
-                    Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
-                }
+               
             }
             
         } catch (ClassNotFoundException | SQLException ex) {
@@ -188,7 +183,7 @@ public class PessoaDao {
         try {
             conexao = Conexao.getConexao();
             if(conexao!=null){
-                String query = "select pk_pessoa, pnome, unome from pessoa left join realizador on pk_pessoa=fk_pessoa where fk_pessoa is null;";
+                String query = "select pk_pessoa, pnome, unome from pessoa left join realizador on pk_pessoa=fk_pessoa where fk_pessoa is null";
                 prepared = conexao.prepareStatement(query);
                 result = prepared.executeQuery();
                 
@@ -281,7 +276,7 @@ public class PessoaDao {
         try {
             conexao = Conexao.getConexao();
             if(conexao!=null){
-                String query = "INSERT INTO public.pessoa(nome, num_bi, data_nascimento, fk_morada, fk_sexo, fk_estado_civil)VALUES (?, ?, ?, ?, ?, ?)";
+                String query = "INSERT INTO public.pessoa(pnome, unome, num_bi, data_nascimento, fk_morada, fk_sexo, fk_estado_civil)VALUES (?, ?, ?, ?, ?, ?, ?)";
                 prepared = conexao.prepareStatement(query);
                 prepared.setString(1, pessoa.getPrimeiroNome());
                 prepared.setString(2, pessoa.getUltimoNome());
@@ -322,7 +317,7 @@ public class PessoaDao {
         try {
             conexao = Conexao.getConexao();
             if(conexao!=null){
-                String query = "DELETE from public.pessoa where nome=? and num_bi=? and "
+                String query = "DELETE from public.pessoa where pnome=?, unome=? and num_bi=? and "
                         + "data_nascimento=? and fk_morada=? and fk_sexo=?, fk_estado_civil=?";
                 prepared = conexao.prepareStatement(query);
                 prepared.setString(1, pessoa.getPrimeiroNome());
@@ -362,8 +357,8 @@ public class PessoaDao {
         try {
             conexao = Conexao.getConexao();
             if(conexao!=null){
-                String query = "UPDATE public.pessoa SET nome=?, num_bi=?, data_nascimento=?,"
-                        + " fk_morada=?, fk_sexo=?, fk_estado_civil=?"
+                String query = "UPDATE public.pessoa SET pnome=?,unome=?, num_bi=?, data_nascimento=?,"
+                        + " fk_morada=?, fk_sexo=?, fk_estado_civil=?, data_cadastro=?"
                         + "WHERE pk_pessoa=?";
                 prepared = conexao.prepareStatement(query);
                 prepared.setString(1, pessoa.getPrimeiroNome());
@@ -373,6 +368,8 @@ public class PessoaDao {
                 prepared.setInt(5, pessoa.getMorada());
                 prepared.setInt(6, pessoa.getSexo());
                 prepared.setInt(7, pessoa.getEstadoCivil());
+                prepared.setDate(8, pessoa.getDatacadastro());
+                prepared.setInt(9, pessoa.getId());
                 prepared.execute();
                 Conexao.fecharConexaoP(conexao, prepared);
                 return true;

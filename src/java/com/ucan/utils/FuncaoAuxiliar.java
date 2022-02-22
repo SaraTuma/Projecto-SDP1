@@ -22,5 +22,24 @@ public class FuncaoAuxiliar {
         return false;
     }
     
+    public static String verificarERetornarMes(int mes){
+        String descricao=null;
+        switch(mes){
+            case 1: descricao="Janeiro"; break;
+            case 2: descricao="Fevereiro"; break;
+            case 3: descricao="Março"; break;
+            case 4: descricao="Abril"; break;
+            case 5: descricao="Maio"; break;
+            case 6: descricao="Junho"; break;
+            case 7: descricao="Julho"; break;
+            case 8: descricao="Agosto"; break;
+            case 9: descricao="Setembro"; break;
+            case 10: descricao="Outubro"; break;
+            case 11: descricao="Novembro"; break;
+            case 12: descricao="Dezembro"; break;
+            default: break;
+        }
+        return descricao;
+    }
     
 }

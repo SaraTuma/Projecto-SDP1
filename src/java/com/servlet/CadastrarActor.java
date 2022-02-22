@@ -5,6 +5,9 @@
  */
 package com.servlet;
 
+import com.ucan.dao.ActorDao;
+import com.ucan.dao.PessoaDao;
+import com.ucan.modelo.Actor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -32,16 +35,34 @@ public class CadastrarActor extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CadastrarActor</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CadastrarActor at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String mensagem=null;
+            if(verificarCampos(request)){
+                Actor actor = new Actor();
+                String[] nome = request.getParameter("nomePessoa").trim().split(" ");
+                Integer pessoaId = new PessoaDao().getId(nome[0], nome[1]);
+                if(pessoaId>0){
+                    actor.setPessoa(pessoaId);
+                    if(new ActorDao().insert(actor)){
+                        mensagem = "Actor : "+nome[0]+" "+ nome[1]+", cadastrado com sucesso!!";
+                    }
+                    else
+                        mensagem = "Erro: ao cadastrar Actor!!";
+                }
+                else
+                    mensagem = "Erro: Código de pessoa invalida!!!";
+            }
+            else
+                mensagem = "Erro: campos inválidos!!";
+            response.sendRedirect("Paginas/actor.jsp?erro="+mensagem);
+            
         }
+        
+    }
+    
+    public boolean verificarCampos(HttpServletRequest request){
+        if(request.getParameter("nomePessoa").trim()!=null)
+            return true;
+        return false;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

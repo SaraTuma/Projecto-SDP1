@@ -53,30 +53,26 @@
                 <li class="link"><a href="alugar.jsp">Alugar</a></li>
                 <li class="link"><a href="telefone.jsp">Telefone</a></li>
                 <li class="link"><a href="email.jsp">Email</a></li>
+                <li class="link"><a href="formDefesa.jsp">Defesa</a></li>
             </ul>
         </section>
         <section class="seccao-direita">
                     <section id="seccao-2" class="seccao-cadastro">
                 <h1 class="h1-title">Cadastrar um filme</h1>
-                    <form id="formCadastro" class="form-Style formCadastro" action="../PessoaServlet?opcao=1" method="POST" >
+                    <form id="formCadastro" class="form-Style formCadastro" action="../CadastrarFilme" method="POST" >
                     
                         <label class="label-texto" for="tOriginal">Titulo Original</label>
-                        <input type="text" name="tOriginal" minlength="4" required>
-                        
+                        <input type="text" name="tOriginal" minlength="2" required>
                         <label class="label-texto" for="tPortugues">Titulo Portugues</label>
-                        <input type="text" name="tPortugues"  minlength="11" required>
-                        
+                        <input type="text" name="tPortugues"  minlength="2" required>
                         <label class="label-texto" for="sinopse">sinopse</label>
-                        <input type="text" name="sinopse" required="true">
-                        
+                        <textarea rows="10" cols="40" name="sinopse" ></textarea>
                         <label class="label-texto" for="duracao">duracao</label>
-                        <input type="time" name="duracao"required>
-                        
+                        <input type="time" name="duracao" step="1" required="true">
                         <label class="label-texto" for="anoPublicado">Ano publicado</label>
                         <input type="number" name="anoPublicado" required>
-                        
-                        <label class="label-texto" for="realizador">Realizador</label>
-                        <select name="realizador" required>
+                        <label class="label-texto" for="nomeRealizador">Realizador</label>
+                        <select name="nomeRealizador" required="true">
                             <%
                                 RealizadorDao dao = new RealizadorDao();
                                 ArrayList<Realizador> array = dao.findAll();
@@ -100,7 +96,6 @@
                             %>
                             
                         </select>
-                        
                             
                         <label class="label-texto" for="genero">Genero </label>
                         <select name="genero" required="true">
@@ -119,7 +114,7 @@
                 </form>
             </section>
             <section id="seccao-1" class="seccao-esquerda-2">
-                <h2 class="h1-title">Todas os filmes do Clube</h2>
+                <h2 class="h1-title">Todos os filmes do Clube</h2>
                 <button class="btn btn-editar" onclick="mostrarSeccaoCadastrar()">Cadastrar</button>
                 <br>
                  <p class="p-erro">
@@ -141,6 +136,7 @@
                             <td class="addBorder"><strong>Sinopse</strong></td>
                             <td class="addBorder"><strong>Duracao</strong></td>
                             <td class="addBorder"><strong>Ano Publicado</strong></td>
+                            <td class="addBorder"><strong>Data de Cadastro</strong></td>
                             <td class="addBorder"><strong>Editar</strong></td>
                             <td class="addBorder"><strong>Eliminar</strong></td>
                         </tr>
@@ -154,17 +150,19 @@
                                 for(Filme filme : arrayfilme){
                                    %>
                                 <tr>
+                    <a href="filme.jsp"></a>
                                    <td><%=filme.getTituloOrig()%> </td>
                                    <td><%=filme.getTituloPort()%> </td>
                                    <td><%=filme.getSinopse()%> </td>
                                    <td><%=filme.getDuracao()%> </td>
                                    <td><%=filme.getAnoPublicado()%> </td>
+                                   <td><%=filme.getDataCadastro()%> </td>
                                                                        
                                     <td class="addBorder">
                                         <a class="btn btn-editar" href="./crud/editarFilme.jsp?id=<%=filme.getId()%>">Editar</a>
                                     </td>
                                     <td class="addBorder">
-                                        <a class="btn btn-eliminar" href="./crud/editarFilme.jsp?id=<%=filme.getId()%>">Eliminar</a>
+                                        <a class="btn btn-eliminar" href="./crud/eliminarFilme.jsp?id=<%=filme.getId()%>">Eliminar</a>
                                     </td>
                                 </tr><%
                                 }

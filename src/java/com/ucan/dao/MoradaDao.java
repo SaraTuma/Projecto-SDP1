@@ -32,7 +32,7 @@ public class MoradaDao {
                 String query = "INSERT INTO public.morada(\n" +
 "	bairro, rua, ncasa, fk_comuna)\n" +
 "	VALUES (?, ?, ?, ?);";
-                PreparedStatement prepared = conexao.prepareStatement(query);
+                prepared = conexao.prepareStatement(query);
                 prepared.setString(1, morada.getBairro());
                 prepared.setString(2, morada.getRua());
                 prepared.setInt(3, morada.getnCasa());
@@ -55,8 +55,8 @@ public class MoradaDao {
             if(conexao!=null){
                 try {
                     String query = "select * from morada";
-                    PreparedStatement prepared = conexao.prepareStatement(query);
-                    ResultSet result = prepared.executeQuery();
+                    prepared = conexao.prepareStatement(query);
+                    result = prepared.executeQuery();
                     while(result.next()){
                                            
                         array.add(
@@ -82,19 +82,17 @@ public class MoradaDao {
         try {
             conexao = Conexao.getConexao();
             if(conexao!=null){
-                try {
+                
                     String query = "select pk_morada from public.morada where descricao=?";
-                    PreparedStatement prepared = conexao.prepareStatement(query);
+                    prepared = conexao.prepareStatement(query);
                     prepared.setString(1, descricao);
-                    ResultSet result = prepared.executeQuery();
-                    while(result.next()){
+                    result = prepared.executeQuery();
+                    if(result.next()){
                         r=result.getInt("pk_morada");
                     }
-                    
+                   
                     Conexao.fecharConexaoPR(conexao, prepared, result);
-                } catch (SQLException ex) {
-                    Logger.getLogger(MoradaDao.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                
             }
             
         } catch (ClassNotFoundException | SQLException ex) {
@@ -108,25 +106,17 @@ public class MoradaDao {
         try {
             conexao = Conexao.getConexao();
             if(conexao!=null){
-                try {
-                    String query = "select * from morada where pk_morada=?";
-                    PreparedStatement prepared = conexao.prepareStatement(query);
-                     prepared.setInt(1, id);
-                    ResultSet result = prepared.executeQuery();
-                    while(result.next()){
-                                           
-                        
-                        morada = new Morada(result.getInt(1), result.getString(2), result.getString(3),
-                                result.getInt(4), result.getInt(5) 
-                        );
-                    }
-                    
-                    Conexao.fecharConexaoPR(conexao, prepared, result);
-                } catch (SQLException ex) {
-                    Logger.getLogger(MoradaDao.class.getName()).log(Level.SEVERE, null, ex);
+                String query = "select * from morada where pk_morada=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                result = prepared.executeQuery();
+                if(result.next()){
+                    morada = new Morada(result.getInt(1), result.getString(2), result.getString(3),
+                            result.getInt(4), result.getInt(5) 
+                    );
                 }
+                Conexao.fecharConexaoPR(conexao, prepared, result);
             }
-            
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(MoradaDao.class.getName()).log(Level.SEVERE, null, ex);
         }

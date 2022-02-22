@@ -4,11 +4,6 @@
     Author     : saratuma
 --%>
 
-<%@page import="com.ucan.dao.ProvinciaDao"%>
-<%@page import="com.ucan.modelo.Municipio"%>
-<%@page import="com.ucan.dao.MunicipioDao"%>
-<%@page import="com.ucan.modelo.Comuna"%>
-<%@page import="com.ucan.dao.ComunaDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -56,7 +51,7 @@
         <section class="seccao-direita">
         <section id="seccao-3" class="seccao-editar">
                 <h1 class="h1-title">Eliminar : <%=request.getParameter("email") %></h1>
-                <form id="formEditar" class="form-Style formEditar" action="../../EliminarPessoa?id=<%=request.getParameter("id")%>" method="post" >
+                <form id="formEditar" class="form-Style formEditar" action="../../EliminarEmail?id=<%=request.getParameter("id")%>" method="post" >
                  
                         <label class="label-texto" for="pessoa">Nome da Pessoa</label>
                         <input type="text" name="pessoa" disabled="disabled" value="<%=request.getParameter("pessoa")%>">

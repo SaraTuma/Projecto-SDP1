@@ -53,6 +53,7 @@ public class EditarPessoa extends HttpServlet {
                 pessoa.setPrimeiroNome(request.getParameter("pnome").trim());
                 pessoa.setUltimoNome(request.getParameter("unome").trim());
                 pessoa.setDataNasc(TratamentoDeDatas.converterDataNormalParaDataSQL(request.getParameter("dataNasc").trim()));
+                pessoa.setDatacadastro(TratamentoDeDatas.converterDataNormalParaDataSQL(request.getParameter("dataCadastro").trim()));
                 pessoa.setNumbi(request.getParameter("bi").trim());
                 pessoa.setSexo(new SexoDao().getID(request.getParameter("sexo").trim()));
                 pessoa.setEstadoCivil(new EstadoCivilDao().getID(request.getParameter("estadoCivil")));
@@ -96,7 +97,8 @@ public class EditarPessoa extends HttpServlet {
                 request.getParameter("rua").trim()!= null &&
                 request.getParameter("ncasa").trim()!= null &&
                 request.getParameter("comuna").trim()!= null &&
-                request.getParameter("id").trim()!= null){
+                request.getParameter("id").trim()!= null  &&
+                request.getParameter("dataCadastro").trim()!= null){
             return true;
         }
             

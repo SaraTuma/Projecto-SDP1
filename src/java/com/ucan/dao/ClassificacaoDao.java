@@ -43,4 +43,46 @@ public class ClassificacaoDao {
         return array;
 
     }
+    
+      public String getDescricao(Integer id){
+       String descricao=null;
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                    String query = "select descricao from public.classificacao where pk_classificacao=?";
+                    prepared = conexao.prepareStatement(query);
+                    prepared.setInt(1, id);
+                    result = prepared.executeQuery();
+                    if(result.next()){
+                        descricao=result.getString("descricao");
+                    }
+                    Conexao.fecharConexaoPR(conexao, prepared, result);
+            }
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ClassificacaoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return descricao;
+    }
+      
+     public Integer getId(String descricao){
+       Integer id=0;
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                    String query = "select pk_classificacao from public.classificacao where descricao=?";
+                    prepared = conexao.prepareStatement(query);
+                    prepared.setString(1, descricao);
+                    result = prepared.executeQuery();
+                    if(result.next()){
+                        id=result.getInt("pk_classificacao");
+                    }
+                    Conexao.fecharConexaoPR(conexao, prepared, result);
+            }
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ClassificacaoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
 }

@@ -5,6 +5,8 @@
  */
 package com.servlet;
 
+import com.ucan.dao.TelefoneDao;
+import com.ucan.modelo.Telefone;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -32,15 +34,23 @@ public class EliminarTelefone extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EliminarTelefone</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EliminarTelefone at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String mensagem=null;
+            Integer telefoneId = Integer.parseInt(request.getParameter("id"));
+            TelefoneDao telefoneDao = new TelefoneDao();
+            Telefone telefone = telefoneDao.findId(telefoneId);
+            
+            if(telefone!=null){
+                if(telefoneDao.delete(telefoneId)){
+                    mensagem = "Eliminado com sucesso: Telefone - "+telefone.getDescricao()+" ID - "+telefoneId;
+                }
+                else{
+                    mensagem = "Erro : ao Eliminar!! Id - "+telefone;
+                }
+            }
+            else{
+                mensagem = "Erro : Telefone nao foi cadastrado!!";
+            }
+            response.sendRedirect("Paginas/telefone.jsp?erro="+mensagem);
         }
     }
 

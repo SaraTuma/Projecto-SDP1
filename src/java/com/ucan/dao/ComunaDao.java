@@ -125,6 +125,32 @@ public class ComunaDao {
         return comuna;
     }
     
+    public Comuna findOne(Integer id){
+       Comuna comuna=null;
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                try {
+                    String query = "select * from comuna where pk_comuna=?";
+                    prepared = conexao.prepareStatement(query);
+                    prepared.setInt(1, id);
+                    ResultSet result = prepared.executeQuery();
+                    while(result.next()){
+                        comuna =new Comuna(result.getInt(1), result.getString(2), result.getInt(3));
+                    }
+                    
+                    Conexao.fecharConexaoPR(conexao, prepared, result);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ComunaDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ComunaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return comuna;
+    }
+    
     
       public boolean delete(Integer id){    
         try {

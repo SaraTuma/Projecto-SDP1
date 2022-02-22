@@ -21,10 +21,6 @@
         <servlet-class>com.servlet.EliminarPessoa</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DefesaServlet</servlet-name>
-        <servlet-class>com.servlet.DefesaServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>TesteServlet</servlet-name>
         <servlet-class>com.servlet.TesteServlet</servlet-class>
     </servlet>
@@ -76,6 +72,30 @@
         <servlet-name>CadastrarRealizador</servlet-name>
         <servlet-class>com.servlet.CadastrarRealizador</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CadastrarFilme</servlet-name>
+        <servlet-class>com.servlet.CadastrarFilme</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminarFilme</servlet-name>
+        <servlet-class>com.servlet.EliminarFilme</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditarFilme</servlet-name>
+        <servlet-class>com.servlet.EditarFilme</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CadastrarAlugar</servlet-name>
+        <servlet-class>com.servlet.CadastrarAlugar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditarAlugar</servlet-name>
+        <servlet-class>com.servlet.EditarAlugar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminarAlugar</servlet-name>
+        <servlet-class>com.servlet.EliminarAlugar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EditarPessoa</servlet-name>
         <url-pattern>/EditarPessoa</url-pattern>
@@ -95,10 +115,6 @@
     <servlet-mapping>
         <servlet-name>EliminarPessoa</servlet-name>
         <url-pattern>/EliminarPessoa</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DefesaServlet</servlet-name>
-        <url-pattern>/DefesaServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>TesteServlet</servlet-name>
@@ -151,6 +167,30 @@
     <servlet-mapping>
         <servlet-name>CadastrarRealizador</servlet-name>
         <url-pattern>/CadastrarRealizador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CadastrarFilme</servlet-name>
+        <url-pattern>/CadastrarFilme</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarFilme</servlet-name>
+        <url-pattern>/EliminarFilme</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditarFilme</servlet-name>
+        <url-pattern>/EditarFilme</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CadastrarAlugar</servlet-name>
+        <url-pattern>/CadastrarAlugar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditarAlugar</servlet-name>
+        <url-pattern>/EditarAlugar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarAlugar</servlet-name>
+        <url-pattern>/EliminarAlugar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

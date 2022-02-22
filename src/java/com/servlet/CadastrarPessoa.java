@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.servlet;
 
 import com.ucan.dao.ComunaDao;
@@ -15,7 +10,6 @@ import com.ucan.modelo.Pessoa;
 import com.ucan.utils.TratamentoDeDatas;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static javafx.beans.binding.Bindings.and;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -84,6 +78,7 @@ public class CadastrarPessoa extends HttpServlet {
                 else
                     mensagem = "Erro: Bilhete de identidade deve ser único!!!";
             }
+            
             response.sendRedirect("Paginas/pessoa.jsp?erro="+mensagem);
             
         }

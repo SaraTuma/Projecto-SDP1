@@ -1,9 +1,17 @@
 <%-- 
-    Document   : eliminarPessoa
+    Document   : editarFilme
     Created on : 16/jan/2022, 15:20:53
     Author     : saratuma
 --%>
 
+<%@page import="com.ucan.modelo.Genero"%>
+<%@page import="com.ucan.dao.GeneroDao"%>
+<%@page import="com.ucan.modelo.Classificacao"%>
+<%@page import="com.ucan.dao.ClassificacaoDao"%>
+<%@page import="com.ucan.dao.RealizadorDao"%>
+<%@page import="com.ucan.modelo.Realizador"%>
+<%@page import="com.ucan.dao.FilmeDao"%>
+<%@page import="com.ucan.modelo.Filme"%>
 <%@page import="com.ucan.dao.ProvinciaDao"%>
 <%@page import="com.ucan.modelo.Municipio"%>
 <%@page import="com.ucan.dao.MunicipioDao"%>
@@ -16,6 +24,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Eliminar Pessoa</title>
         <link rel="stylesheet" href="../../Css/comum.css">
+        <link rel="stylesheet" href="../../Css/pessoa.css">
         <link rel="stylesheet" href="../../Css/editar.css">
         <style>
             .btn{
@@ -40,77 +49,86 @@
                     
                 </li>
                 <li class="link"><a href="../actor.jsp">Actor</a></li>
-                <li class="link"> <a href="../realizador.jsp">Realizador</a></li>
+                <li class="link"><a href="../realizador.jsp">Realizador</a></li>
                 <li class="link"><a href="../socio.jsp">Socio</a></li>
                 <li class="link"><a href="../filme.jsp">Filme</a></li>
                 <li class="link"><a href="../filme-actor.jsp">Actores de Filmes</a></li>
                 <li class="link"><a href="../alugar.jsp">Alugar</a></li>
+                <li class="link"><a href="../telefone.jsp">Telefone</a></li>
+                <li class="link"><a href="../email.jsp">Email</a></li>
             </ul>
         </section>
         <section class="seccao-direita">
         <section id="seccao-3" class="seccao-editar">
-                <h1 class="h1-title">Eliminar : <%=request.getParameter("nome") %></h1>
-                <form id="formEditar" class="form-Style formEditar" action="../../FilmeServlet?id=<%=request.getParameter("id")%>&opcao=3" method="post" >
-                 
-                        <label class="label-texto" for="nome">Nome Completo</label>
-                        <input type="text" name="nome" disabled="disabled" value="<%=request.getParameter("nome") %>">
-                        <br>
+                <h1 class="h1-title">Editar Filmes </h1>
+                <% Integer filmeId = Integer.parseInt(request.getParameter("id").trim());%>
+                <form id="formEditar" class="form-Style formEditar" action="../../EditarFilme?id=<%=filmeId%>" method="post" >
+                    <% Filme filme =  new FilmeDao().findById(filmeId);%>
+                      
+                        <label class="label-texto" for="tOriginal">Titulo Original</label>
+                        <input type="text" name="tOriginal" minlength="2" value="<%=filme.getTituloOrig()%>">
+                       
+                        <label class="label-texto" for="tPortugues">Titulo Portugues</label>
+                        <input type="" name="tPortugues"  minlength="2" value="<%=filme.getTituloPort()%>">
                         
-                        <label class="label-texto" for="bi">Numero do BI (Bilhete de Identidade) : </label>
-                        <input type="text" name="bi" disabled="disabled" value="<%=request.getParameter("bi") %>">
-                        <br>
-                        <label class="label-texto" for="dataNasc">Data de Nascimento : </label>
-                        <input type="date" name="dataNasc" disabled="disabled" value="<%=request.getParameter("data") %>">
-                        <br>
-                        <label class="label-texto" for="telefone">Telefone : </label>
-                        <input type="tel" name="telefone" disabled="disabled" value="<%=request.getParameter("telefone")%>">
+                        <label class="label-texto" for="sinopse">Sinopse</label>
+                        <textarea rows="10" cols="40" name="sinopse" ><%=filme.getSinopse()%></textarea>
                         
-                        <br>
-                        <label class="label-texto" for="email">E-mail : </label>
-                        <input type="email" name="email" disabled="disabled" value=<%=request.getParameter("email")%>>
-                        <br>
-                        <label class="label-texto" for="sexo">Sexo : </label>
-                        <select name="sexo" >
-                            <option selected="true" disabled="disabled"><%=request.getParameter("sexo")%></option>
-                        </select>
-                        <br>
-                        <label class="label-texto" for="estadoCivil">Estado Civil : </label>
-                        <select name="estadoCivil" >
-                            <option selected="true" disabled="disabled"><%=request.getParameter("estado")%></option>
-                        </select>
-                        <br>
-                        <label class="label-texto" for="localizacao">Localização </label>
-                        <div class="div-localizacao">
-                            <% 
-                                String comuna = request.getParameter("comuna");
-                                Comuna nova = new ComunaDao().findOne(comuna);
-                                Integer idMuni = nova.getMunicipio();
-                                Municipio municipio = new MunicipioDao().findMunicipio(idMuni);
-                                String provincia = new ProvinciaDao().getDescricao(municipio.getProvincia());
+                        <label class="label-texto" for="duracao">Duracao</label>
+                        <input type="time" name="duracao" step="1" value="<%=filme.getDuracao()%>">
+                        
+                        <label class="label-texto" for="anoPublicado">Ano publicado</label>
+                        <input type="number" name="anoPublicado" value="<%=filme.getAnoPublicado()%>">
+                        
+                        <label class="label-texto" for="nomeRealizador">Realizador</label>
+                        
+                        <% String nomeRealizador = new RealizadorDao().getRealizadorName(filme.getRealizador());%>
+                        <select name="nomeRealizador" required>
+                            <option selected="true"><%=nomeRealizador%></option>
+                            <%
+                               String nomeR;
+                               for(Realizador realizador : new RealizadorDao().findAll()){
+                                   nomeR = new RealizadorDao().getRealizadorName(realizador.getId());
+                                   if(!nomeR.equals(nomeRealizador)){
+                                   %><option><%=new RealizadorDao().getRealizadorName(realizador.getId())%> </option><%
+                                   }
+                                }
                             %>
-                            <select class="div-localizacao-interior" name="provincia">
-                                <option selected="true" disabled="disabled"><%=provincia%></option>
-                            </select>
-                            <select class="div-localizacao-interior" name="municipio">
-                                <option selected="true" disabled="disabled"><%=municipio.getDescricao()%></option>
-                            </select>
-                            <select class="div-localizacao-interior" name="Comuna">
-                                <option selected="true" disabled="disabled"><%=comuna%></option>
-                            </select>
-                        </div>
-                            <label class="label-texto" for="">Morada  </label> <br>
-                        <label class="label-texto" for="bairro">Bairro: </label>
-                        <input type="text" name="bairro" disabled="disabled" value="<%=request.getParameter("bairro") %>">
-                        <br>
-                        <label class="label-texto" for="rua">Rua : </label>
-                        <input type="text" name="rua" disabled="disabled" value="<%=request.getParameter("rua") %>">
-                        <br>
-                        <label class="label-texto" for="casa">Número da Casa: </label>
-                        <input type="number" name="ncasa" disabled="disabled" value="<%=request.getParameter("casa") %>">
-                        <br>
-                        <p class="p-erro"></p>
-                        <input type="submit" class="btn" value="Eliminar">
-                        <a class="btn btn-eliminar" href="../pessoa.jsp">Cancelar</a>
+                            
+                        </select>
+                            
+                        <label class="label-texto" for="classificacao">Classificaco </label>
+                        <% String nomeClassificacao = new ClassificacaoDao().getDescricao(filme.getClassificacao()); %>
+                        <select name="classificacao" required="true">
+                            <option selected="true"><%=nomeClassificacao%></option>
+                            <%
+                                for(Classificacao cla : new ClassificacaoDao().findAll()){
+                                    if(!cla.getDescricao().equals(nomeClassificacao)){
+                                   %><option><%=cla.getDescricao()%> </option><%
+                                    }
+                                }
+                            %>
+                            
+                        </select>
+                                                    
+                        <label class="label-texto" for="genero">Genero </label>
+                        <%String nomeGenero = new GeneroDao().getDescricao(filme.getGenero());%>
+                        <select name="genero" required="true">
+                            <option selected="true"><%=nomeGenero%></option>
+                            <%
+                                for(Genero genero : new GeneroDao().findAll()){
+                                    if(!nomeGenero.equals(genero.getDescricao())){
+                                   %><option><%=genero.getDescricao()%> </option><%
+                                     }
+                                }
+                            %>
+                        </select>
+                        
+                        <label class="label-texto" for="dataCadastro">Data de Cadastro</label>
+                        <input type="date" name="dataCadastro" value="<%=filme.getDataCadastro()%>">
+                        
+                        <input type="submit" class="btn" value="Editar">
+                        <a class="btn btn-eliminar" href="../filme.jsp">Cancelar</a>
                     
                 </form>
             </section>

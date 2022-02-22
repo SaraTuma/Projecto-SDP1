@@ -4,6 +4,13 @@
     Author     : saratuma
 --%>
 
+<%@page import="com.ucan.dao.PessoaDao"%>
+<%@page import="com.ucan.modelo.Socio"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.ucan.dao.FilmeDao"%>
+<%@page import="com.ucan.dao.SocioDao"%>
+<%@page import="com.ucan.dao.AlugarDao"%>
+<%@page import="com.ucan.modelo.Alugar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,6 +36,7 @@
                 <li class="link"><a class="active" href="#">Alugados</a></li>
                 <li class="link"><a href="telefone.jsp">Telefone</a></li>
                 <li class="link"><a href="email.jsp">Email</a></li>
+                <li class="link"><a href="formDefesa.jsp">Defesa</a></li>
             </ul>
         </section>
         <section class="seccao-direita">
@@ -58,44 +66,57 @@
                 <table>
                     <thead>
                         <tr>
-                            <td class="addBorder"><strong>Nome</strong></td>
+                            <td class="addBorder"><strong>Titulos do filme</strong></td>
+                            <td class="addBorder"><strong>Nome do Socio</strong></td>
+                            <td class="addBorder"><strong>Data que alugou</strong></td>
+                            <td class="addBorder"><strong>Data de devolucao</strong></td>
                             <td class="addBorder"><strong>Data de cadastro</strong></td>
+                            <td class="addBorder"><strong>Operação</strong></td>
                            
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="addBorder">Sara Tuma</td>
-                            <td class="addBorder">29-04-2010</td>
+                            <td>teste</td>
                         </tr>
-                        <tr>
-                            <td class="addBorder">Isaura Manico</td>
-                            <td class="addBorder">29-04-2010</td>
-                            
-                        </tr>
-
-                        <tr>
-                            <td class="addBorder">Creuma Kuzola</td>
-                            <td class="addBorder">29-04-2010</td>
-                            
-                        </tr>
-                        <tr>
-                            <td class="addBorder">Eufranio Diogo</td>
-                            <td class="addBorder">29-04-2010</td>
-                        </tr>
+                        <%
+                            String nomeSocio=null;
+                            Integer idPessoa=null;
+                            String titulosFilme =null;
+                            for(Alugar aluguer : new AlugarDao().findAll()){
+                                idPessoa = new SocioDao().getPessoaId(aluguer.getSocio());
+                                nomeSocio = new SocioDao().getPessoaNome(idPessoa);
+                                titulosFilme = new FilmeDao().findByTitles(aluguer.getFilme());
+                                %>
+                            <tr>
+                                    <td class="addBorder"><%=titulosFilme%></td>
+                                    <td class="addBorder"><%=nomeSocio%></td>
+                                    <td class="addBorder"><%=aluguer.getDataAlugar()%></td>
+                                    <td class="addBorder"><%=aluguer.getDataDevolucao()%></td>
+                                    <td class="addBorder"><%=aluguer.getDataCadastro()%></td>
+                            </tr>
+                            <%}
+                            %>
+                        
+                        
                     </tbody>
                 </table>
             </section>
             <section id="seccao-2" class="seccao-cadastro">
-                <h1 class="h1-title">Cadastrar um Actor</h1>
+                <h1 class="h1-title"> Alugar um filme </h1>
                 <form id="formCadastro" class="form-Style formCadastro" action="" method="post" >
                     
-                        <label class="label-texto" for="actor">Escolhe o Actor</label>
-                        <select name="actor">
-                            <option value="">Sara Tuma</option>
-                            <option value="">Isaura Manico</option>
-                            <option value="">Marilda Sungu</option>
-                            <option value="">Creuma Kuzola</option>
+                        <label class="label-texto" for="actor">Nome do socio</label>
+                        <select name="nomeSocio">
+                            <%
+                            ArrayList<Socio> socios = new SocioDao().findAll();
+                            String nome, categoria;
+                            for(Socio socio : socios) {
+                                nome = new PessoaDao().findId(socio.getPessoa()).getNomeCompleto();
+                                //categoria = new CategoriaSocioDao().getDescricao(socio.getCategoria());
+                              %>
+                            <option><%=nome%></option>
+                            <%}%>
                         </select>                     
                         <input type="submit" class="button-enviar" value="Cadastrar">
                     

@@ -37,6 +37,7 @@
                 <li class="link"><a href="alugar.jsp">Alugar</a></li>
                 <li class="link"><a href="telefone.jsp">Telefone</a></li>
                 <li class="link"><a href="email.jsp">Email</a></li>
+                <li class="link"><a href="formDefesa.jsp">Defesa</a></li>
             </ul>
         </section>
         <section class="seccao-direita">

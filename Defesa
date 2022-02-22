@@ -1,0 +1,14 @@
+- identificar as tabelas
+- seus relacionamentos 
+- o que vai receber pela jsp : ano, mes1, mes2, genero do filme
+	- DAO (buscar os metodos que retornam os dados)
+	- DefesaDao: like '?%'
+	
+- o que vai mostrar pela jsp : nomes dos socios
+
+
+Busca da defesa:
+
+	Mostrar os socios cujo nome começa com determinada letra que alugaram filmes de determinado genero em um intervalo de meses de determinado ano.
+
+sugestao : mostrar quantas vezes determinado socio, alugou determinado filme.

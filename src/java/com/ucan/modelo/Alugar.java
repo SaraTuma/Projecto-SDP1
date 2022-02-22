@@ -39,6 +39,10 @@ public class Alugar {
         this.dataDevolucao = dataDevolucao;
         this.dataCadastro = dataCadastro;
     }
+
+    public Alugar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 

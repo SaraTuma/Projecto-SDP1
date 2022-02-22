@@ -100,6 +100,73 @@ public class FilmeDao {
         return array;
     }
     
+    
+    public Filme findById(Integer id) {
+       Filme modelo = null;
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "select * from public.filme where pk_filme=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                result = prepared.executeQuery();
+                if(result.next()){
+                    
+                    modelo =    new Filme(result.getInt(1), result.getString(2), result.getString(3),
+                        result.getString(4), result.getTime(5), result.getInt(6), 
+                        result.getInt(7), result.getInt(8), result.getDate(9),result.getInt(10)
+                    );
+                }
+                Conexao.fecharConexaoPR(conexao, prepared, result);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(FilmeDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return modelo;
+    }
+    
+     public String findByTitles(Integer id) {
+       String titulos = null;
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "select titulo_orig, titulo_port from public.filme where pk_filme=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                result = prepared.executeQuery();
+                if(result.next()){
+                    
+                    titulos = result.getString(1)+" ; "+ result.getString(2);
+                }
+                Conexao.fecharConexaoPR(conexao, prepared, result);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(FilmeDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return titulos;
+    }
+    
+    
+     public boolean verifyById(Integer id) {
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "select * from public.filme where pk_filme=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                result = prepared.executeQuery();
+                if(result.next()){
+                    Conexao.fecharConexaoPR(conexao, prepared, result);
+                    return true;
+                }
+                Conexao.fecharConexaoPR(conexao, prepared, result);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(FilmeDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
         public boolean update(Filme modelo){        
         try {
             conexao = Conexao.getConexao();

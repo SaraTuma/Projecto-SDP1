@@ -5,7 +5,7 @@
  */
 package com.ucan.dao;
 
-import com.ucan.modelo.Auxiliar;
+import com.ucan.modelo.Defesa;
 import com.ucan.modelo.Email;
 import com.ucan.modelo.Telefone;
 import com.ucan.utils.Conexao;
@@ -73,7 +73,28 @@ public class TelefoneDao {
         return array;
     }
         
-    
+     public Telefone findId(Integer id) {
+       Telefone modelo=null;
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "select * from telefone where pk_telefone=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                result = prepared.executeQuery();
+                if(result.next()){
+                   
+                    modelo = new Telefone(result.getInt(1), result.getString(2), result.getInt(3))
+                    ;
+                }
+                
+                Conexao.fecharConexaoPR(conexao, prepared, result);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(TelefoneDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return modelo;
+    }
         
     public boolean insert( Telefone telefone){  
         try {
@@ -134,8 +155,8 @@ public class TelefoneDao {
     }
     
     
-    public ArrayList<Auxiliar> buscarTelefonesPorPessoa(Integer pk_pessoa){   
-        ArrayList<Auxiliar> array = new ArrayList<>();
+    public ArrayList<Defesa> buscarTelefonesPorPessoa(Integer pk_pessoa){   
+        ArrayList<Defesa> array = new ArrayList<>();
         try {
             conexao = Conexao.getConexao();
             if(conexao!=null){
@@ -144,7 +165,7 @@ public class TelefoneDao {
                 prepared.setInt(1, pk_pessoa);
                 result = prepared.executeQuery();
                 while(result.next()){
-                    Auxiliar aux = new Auxiliar();
+                    Defesa aux = new Defesa();
                     aux.setDescricao(result.getString(1));
                     aux.setPrimeiroNome(result.getString(2));
                     aux.setUltimoNome(result.getString(3));

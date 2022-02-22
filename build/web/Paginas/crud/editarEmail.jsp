@@ -53,13 +53,14 @@
         <section id="seccao-3" class="seccao-editar">
                 <h1 class="h1-title">Editar um Email</h1>
                 <%
-                Integer pId = Integer.parseInt(request.getParameter("id").trim());
+                Integer pId = Integer.parseInt(request.getParameter("idpessoa").trim());
+                Integer emailId = Integer.parseInt(request.getParameter("id").trim());
                 %>
-                <form id="formEditar" class="form-Style formEditar" action="../../EditarSocio?id=<%=pId%>" method="post" >
+                <form id="formEditar" class="form-Style formEditar" action="../../EditarEmail?id=<%=emailId%>" method="post" >
                     
-                        <label class="label-texto" for="pessoa">Nome da Pessoa</label>
+                        <label class="label-texto" for="nomePessoa">Nome da Pessoa</label>
                         
-                        <select name="pessoa">
+                        <select name="nomePessoa">
                             <option selected="true">Sara Tuma</option>
                             <%
                                 

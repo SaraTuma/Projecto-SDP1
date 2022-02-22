@@ -18,7 +18,7 @@ public class Filme {
     private Date dataCadastro;
     private Time duracao;
 
-    public Filme(String tituloPort, String tituloOrig, String sinopse, 
+    public Filme(String tituloOrig, String tituloPort, String sinopse, 
             Time duracao, Integer realizador, Integer classificacao, 
             Integer genero, Integer anoPublicado) {
         this.tituloPort = tituloPort;
@@ -31,7 +31,7 @@ public class Filme {
         this.anoPublicado = anoPublicado;
     }
 
-    public Filme(Integer id, String tituloPort, String tituloOrig, String sinopse, 
+    public Filme(Integer id, String tituloOrig, String tituloPort, String sinopse, 
              Time duracao, Integer realizador, 
             Integer classificacao, Integer genero,Date dataCadastro, Integer anoPublicado) {
         this.id = id;
@@ -44,6 +44,10 @@ public class Filme {
         this.classificacao = classificacao;
         this.genero = genero;
         this.anoPublicado=anoPublicado;
+    }
+
+    public Filme() {
+       
     }
 
     public Integer getAnoPublicado() {

@@ -48,6 +48,7 @@
                 <li class="link"><a href="alugar.jsp">Alugar</a></li>
                 <li class="link"><a href="telefone.jsp">Telefone</a></li>
                 <li class="link"><a href="email.jsp">Email</a></li>
+                <li class="link"><a href="formDefesa.jsp">Defesa</a></li>
             </ul>
         </section>
         <section class="seccao-direita">
@@ -105,8 +106,8 @@
                 <h1 class="h1-title">Cadastrar um Actor</h1>
                 <form id="formCadastro" class="form-Style formCadastro" action="../CadastrarActor" method="POST" >
                     
-                        <label class="label-texto" for="actor">Escolhe o Actor</label>
-                        <select name="actor">
+                        <label class="label-texto" for="nomePessoa">Escolhe o Actor</label>
+                        <select name="nomePessoa">
                             <%
                             for(Pessoa pessoa : new PessoaDao().findAllPersonNotActors()){
                             %>
@@ -115,10 +116,9 @@
                             }
                             %>
                             
-                            
                         </select>                     
                         <input type="submit" class="button-enviar" value="Cadastrar">
-                        <button class="btn btn-eliminar" onclick="mostrarSeccaoVisualizar()()">Cancelar</button>
+                        <a class="btn btn-eliminar" href="actor.jsp">Cancelar</a>
                     
                 </form>
             </section>

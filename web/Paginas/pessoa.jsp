@@ -30,14 +30,17 @@
         <script src="../Javascript/comum.js"></script>
         <style>
             .btn{
-                    background-color: green;
-                    border: none; padding: 0.5rem; color: white; border-radius: 0.5rem; 
-                    font-weight: 1.2rem;
-                    text-decoration: none;
-                    cursor: pointer;
+                background-color: green;
+                border: none; padding: 0.5rem; color: white; border-radius: 0.5rem; 
+                font-weight: 1.2rem;
+                text-decoration: none;
+                cursor: pointer;
             }
             .btn-eliminar{
                 background-color: red;
+            }
+            .bg-red{
+                color: red;
             }
         </style>
     </head>
@@ -57,25 +60,27 @@
                 <li class="link"><a href="alugar.jsp">Alugar</a></li>
                 <li class="link"><a href="telefone.jsp">Telefone</a></li>
                 <li class="link"><a href="email.jsp">Email</a></li>
+                <li class="link"><a href="formDefesa.jsp">Defesa</a></li>
             </ul>
         </section>
         <section class="seccao-direita">
                     <section id="seccao-2" class="seccao-cadastro">
                 <h1 class="h1-title">Cadastrar uma Pessoa</h1>
+                <p class="bg-red">Campos obrigatórios *</p>
                     <form id="formCadastro" class="form-Style formCadastro" action="../CadastrarPessoa" method="POST" >
                     
-                        <label class="label-texto" for="pnome">Primeiro nome</label>
-                        <input type="text" name="pnome" id="nome" minlength="4" required>
-                        <label class="label-texto" for="unome">Ultimo nome</label>
-                        <input type="text" name="unome" id="nome" minlength="4" required>
+                        <label class="label-texto" for="pnome">Primeiro nome <span class="bg-red"> *</span> </label>
+                        <input type="text" name="pnome" id="nome" minlength="2" required>
+                        <label class="label-texto" for="unome">Ultimo nome <span class="bg-red"> *</span> </label>
+                        <input type="text" name="unome" id="nome" minlength="2" required>
                         
-                        <label class="label-texto" for="bi">Numero do BI (Bilhete de Identidade)</label>
+                        <label class="label-texto" for="bi">Numero do BI (Bilhete de Identidade) <span class="bg-red"> *</span> </label>
                         <input type="text" name="bi" id="bi" minlength="11" required>
                         
-                        <label class="label-texto" for="dataNasc">Data de Nascimento</label>
+                        <label class="label-texto" for="dataNasc">Data de Nascimento <span class="bg-red"> *</span> </label>
                         <input type="date" name="dataNasc" id="dataNasc"  required="true">
                         
-                        <label class="label-texto" for="sexo">Sexo </label>
+                        <label class="label-texto" for="sexo">Sexo <span class="bg-red"> *</span> </label>
                         <select name="sexo" required>
                             <%
                                 SexoDao dao = new SexoDao();
@@ -87,7 +92,7 @@
                             %>
                             
                         </select>
-                        <label class="label-texto" for="estadoCivil">Estado civil </label>
+                        <label class="label-texto" for="estadoCivil">Estado civil <span class="bg-red"> *</span> </label>
                         <select name="estadoCivil" required="true">
                             <%
                                 EstadoCivilDao daoe = new EstadoCivilDao();
@@ -101,7 +106,7 @@
                             
                         </select>
                         
-                        <label class="label-texto" for="localizacao">Morada </label>
+                        <label class="label-texto" for="localizacao">Morada <span class="bg-red"> *</span> </label>
                         <div class="div-localizacao">
                             <select class="div-localizacao-interior" name="provincia">
                                 <%
@@ -147,6 +152,7 @@
                                 <input type="number" name="ncasa" id="nome_completo" required>
                             </div>
                         </div>
+                        
                         <input type="submit" class="button-enviar" value="Cadastrar">
                         <button class="btn btn-eliminar" onclick="mostrarSeccaoVisualizar()()">Cancelar</button>
                     
@@ -179,6 +185,7 @@
                             <td class="addBorder"><strong>Sexo</strong></td>
                             <td class="addBorder"><strong>Estado civil</strong></td>
                             <td class="addBorder"><strong>Morada</strong></td>
+                            <td class="addBorder"><strong>Data de Cadastro</strong></td>
                             <td class="addBorder"><strong>Acção</strong></td>
                         </tr>
                     </thead>
@@ -211,17 +218,13 @@
                                        <%=descricao%> - <%=mora.getBairro()%> <br>
                                        <%=mora.getRua()%> - <%=mora.getnCasa()%>
                                     </td> 
-                                    
+                                    <td><%=pe.getDatacadastro()%></td>
                                     <td class="addBorder">
                                 
-                                    <a class="btn btn-editar" href="./crud/editarPessoa.jsp?id=<%=pe.getId()%>&nome=<%=pe.getNomeCompleto()%>&bi=<%=pe.getNumbi()%>
-                                       &data=<%=pe.getDataNasc()%>&sexo=<%=sexod%>
-                                       &comuna=<%=descricao%>&bairro=<%=mora.getBairro()%>&rua=<%=mora.getRua()%>&casa=<%=mora.getnCasa()%>&estado=<%=estadoCivil%>">Editar</a>
+                                    <a class="btn btn-editar" href="./crud/editarPessoa.jsp?id=<%=pe.getId()%>">Editar</a>
                                        
                                        
-                                    <a class="btn btn-eliminar" href="./crud/eliminarPessoa.jsp?id=<%=pe.getId()%>&nome=<%=pe.getNomeCompleto()%>&bi=<%=pe.getNumbi()%>
-                                       &data=<%=pe.getDataNasc()%>&sexo=<%=sexod%>
-                                       &comuna=<%=descricao%>&bairro=<%=mora.getBairro()%>&rua=<%=mora.getRua()%>&casa=<%=mora.getnCasa()%>&estado=<%=estadoCivil%>">Eliminar</a>
+                                    <a class="btn btn-eliminar" href="./crud/eliminarPessoa.jsp?id=<%=pe.getId()%>">Eliminar</a>
                                 
                                     </td>
                         </tr><%

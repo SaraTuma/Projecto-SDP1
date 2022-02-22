@@ -62,6 +62,28 @@ public class ActorDao {
         return array;
     }
     
+    
+       public Integer getPessoaId(Integer idActor) {
+       Integer idPessoa = null;
+        try {
+            
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "SELECT pk_pessoa from public.pessoa inner join public.actor on pk_pessoa=fk_pessoa where pk_actor=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, idActor);
+                result = prepared.executeQuery();
+                if(result.next()){
+                    idPessoa=result.getInt(1);
+                }
+                Conexao.fecharConexaoPR(conexao, prepared, result);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ActorDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return idPessoa;
+    }
+    
     public String getPessoaNome(Integer id) {
        String nome = null;
         try {

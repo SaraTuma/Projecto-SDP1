@@ -50,6 +50,75 @@ public class SocioDao {
         return array;
     }
       
+    
+      
+      
+       public Integer getPessoaId(Integer idSocio) {
+       Integer idPessoa = null;
+        try {
+            
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "SELECT pk_pessoa from public.pessoa inner join public.socio on pk_pessoa=fk_pessoa where pk_socio=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, idSocio);
+                result = prepared.executeQuery();
+                if(result.next()){
+                    idPessoa=result.getInt(1);
+                }
+                Conexao.fecharConexaoPR(conexao, prepared, result);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(SocioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return idPessoa;
+    }
+      
+       
+      public String getPessoaNome(Integer id) {
+       String nome = null;
+        try {
+            
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "SELECT pnome, unome from public.pessoa inner join public.socio on pk_pessoa=fk_pessoa where fk_pessoa=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                result = prepared.executeQuery();
+                if(result.next()){
+                    nome=result.getString(1)+" "+result.getString(2);
+                }
+                Conexao.fecharConexaoPR(conexao, prepared, result);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(SocioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return nome;
+    }
+       
+      
+    public Socio findId(Integer id) {
+       Socio modelo=null;
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "select * from socio where pk_socio=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                result = prepared.executeQuery();
+                if(result.next()){
+                   
+                    modelo = new Socio(result.getInt(1), result.getInt(2), result.getDate(3))
+                    ;
+                }
+                
+                Conexao.fecharConexaoPR(conexao, prepared, result);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(SocioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return modelo;
+    }
       
        public boolean insert( Socio socio){  
         try {

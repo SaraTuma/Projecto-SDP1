@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ucan.modelo;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 /**
  *
@@ -29,6 +23,9 @@ public class Actor {
         this.dataCadastro = dataCadastro;
     }
 
+    public Actor() {
+    }
+
     public Integer getPessoa() {
         return pessoa;
     }
@@ -37,9 +34,6 @@ public class Actor {
         this.pessoa = pessoa;
     }
 
-   
-    
-    
     public Integer getId() {
         return id;
     }

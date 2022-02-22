@@ -6,6 +6,8 @@
 package com.ucan.utils;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -33,5 +35,18 @@ public class TratamentoDeDatas
             Logger.getLogger(TratamentoDeDatas.class.getName()).log(Level.SEVERE, null, ex);
         }
         return sqlDate;
+    }
+    
+    public static Time converterTempoParaTimeSQL(String duracao) {
+	DateFormat formato = new SimpleDateFormat("HH:mm:ss");
+        Time tempo=null;
+	
+        try {
+            tempo = new java.sql.Time(formato.parse(duracao).getTime());
+        } catch (ParseException ex) {
+            Logger.getLogger(TratamentoDeDatas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tempo;
+	
     }
 }

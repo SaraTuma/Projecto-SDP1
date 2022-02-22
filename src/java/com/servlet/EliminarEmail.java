@@ -5,6 +5,8 @@
  */
 package com.servlet;
 
+import com.ucan.dao.EmailDao;
+import com.ucan.modelo.Email;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -32,15 +34,23 @@ public class EliminarEmail extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EliminarEmail</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EliminarEmail at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String mensagem=null;
+            Integer emailId = Integer.parseInt(request.getParameter("id"));
+            EmailDao emailDao = new EmailDao();
+            Email email = emailDao.findId(emailId);
+            
+            if(email!=null){
+                if(emailDao.delete(emailId)){
+                    mensagem = "Eliminado com sucesso: Email - "+email.getDescricao()+" ID - "+emailId;
+                }
+                else{
+                    mensagem = "Erro : ao Eliminar!! Id - "+emailId;
+                }
+            }
+            else{
+                mensagem = "Erro : Email nao foi cadastrado!!";
+            }
+            response.sendRedirect("Paginas/email.jsp?erro="+mensagem);
         }
     }
 

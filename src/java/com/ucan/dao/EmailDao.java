@@ -40,6 +40,29 @@ public class EmailDao {
         return array;
     }
         
+    public Email findId(Integer id) {
+       Email modelo=null;
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "select * from email where pk_email=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                result = prepared.executeQuery();
+                if(result.next()){
+                   
+                    modelo = new Email(result.getInt(1), result.getString(2), result.getInt(3))
+                    ;
+                }
+                
+                Conexao.fecharConexaoPR(conexao, prepared, result);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(EmailDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return modelo;
+    }
+        
     public boolean insert( Email email){  
         try {
             conexao = Conexao.getConexao();
@@ -58,6 +81,28 @@ public class EmailDao {
         }
         return false;
         
+    }
+    
+    
+      public boolean verifyId(Integer id){
+        try {
+            conexao = Conexao.getConexao();
+            if(conexao!=null){
+                String query = "select * from public.email where pk_email=?";
+                prepared = conexao.prepareStatement(query);
+                prepared.setInt(1, id);
+                result = prepared.executeQuery();
+                if(result.next()){
+                    Conexao.fecharConexaoPR(conexao, prepared, result);
+                    return true;
+                }
+                Conexao.fecharConexaoPR(conexao, prepared, result);
+            }
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(EmailDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
     
     public boolean update(Email email){        

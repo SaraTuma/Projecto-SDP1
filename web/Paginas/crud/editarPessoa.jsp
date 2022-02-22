@@ -4,6 +4,10 @@
     Author     : saratuma
 --%>
 
+<%@page import="com.ucan.dao.MoradaDao"%>
+<%@page import="com.ucan.modelo.Morada"%>
+<%@page import="com.ucan.modelo.Pessoa"%>
+<%@page import="com.ucan.dao.PessoaDao"%>
 <%@page import="com.ucan.modelo.EstadoCivil"%>
 <%@page import="com.ucan.dao.EstadoCivilDao"%>
 <%@page import="com.ucan.dao.SexoDao"%>
@@ -54,45 +58,42 @@
                 <li class="link"><a href="../filme.jsp">Filme</a></li>
                 <li class="link"><a href="../filme-actor.jsp">Actores de Filmes</a></li>
                 <li class="link"><a href="../alugar.jsp">Alugar</a></li>
+                <li class="link"><a href="../telefone.jsp">Telefone</a></li>
+                <li class="link"><a href="../email.jsp">Email</a></li>
             </ul>
         </section>
         <section class="seccao-direita">
         <section id="seccao-3" class="seccao-editar">
                 <h1 class="h1-title">Editar dados de uma Pessoa</h1>
-                <form id="formEditar" class="form-Style formEditar" action="../../EditarPessoa?id=<%=request.getParameter("id")%>" method="POST" >
+                <% Integer pessoaId = Integer.parseInt(request.getParameter("id").trim());%>
+                <form id="formEditar" class="form-Style formEditar" action="../../EditarPessoa?id=<%=pessoaId%>" method="POST" >
                     
-                    <label class="label-texto" for="pessoa">Escolhe a Pessoa</label>
+                    <%
+                    Pessoa pessoa = new PessoaDao().findId(pessoaId);
+                    %>
+                    
                         
                         <label class="label-texto" for="pnome">Primeiro Nome</label>
-                        <input type="text" name="pnome" id="nome_completo" value="<%=request.getParameter("pnome") %>">
+                        <input type="text" name="pnome" id="nome_completo" value="<%=pessoa.getPrimeiroNome() %>">
                         <br>
                         <label class="label-texto" for="unome">Ultimo Nome</label>
-                        <input type="text" name="unome" id="nome_completo" value="<%=request.getParameter("unome") %>">
+                        <input type="text" name="unome" id="nome_completo" value="<%=pessoa.getUltimoNome() %>">
                         <br>
                         
                         <label class="label-texto" for="bi">Numero do BI (Bilhete de Identidade)</label>
-                        <input type="text" name="bi" id="bi" value="<%=request.getParameter("bi") %>">
+                        <input type="text" name="bi" id="bi" value="<%=pessoa.getNumbi() %>">
                         <br>
                         <label class="label-texto" for="dataNasc">Data de Nascimento</label>
-                        <input type="date" name="dataNasc" id="dataNasc" value="<%=request.getParameter("data") %>">
-                        <br>
-                         <label class="label-texto" for="telefone">Telefone : </label>
-                        <input type="tel" name="telefone" value="<%=request.getParameter("telefone")%>">
+                        <input type="date" name="dataNasc" id="dataNasc" value="<%=pessoa.getDataNasc() %>">
                         
-                        <br>
-                        <label class="label-texto" for="email">E-mail : </label>
-                        <input type="email" name="email"value=<%=request.getParameter("email")%>>
                         <br>
                         <label class="label-texto" for="sexo">Sexo : </label>
                         <select name="sexo" >
-                            <option selected="true" ><%=request.getParameter("sexo")%></option>
+                            <%String sexoPessoa = new SexoDao().getDescricao(pessoa.getSexo());%>
+                            <option selected="true" ><%=sexoPessoa%></option>
                             <%
-                                   
-                                ArrayList<Sexo> arraySexo = new ArrayList<>();
-                                arraySexo = new SexoDao().findAll();
-
-                                for(Sexo sexo : arraySexo){
-                                    if(! sexo.getDescricao().equals(request.getParameter("sexo"))){
+                                for(Sexo sexo : new SexoDao().findAll()){
+                                    if(! sexo.getDescricao().equals(sexoPessoa)){
                                     %>
                                         <option ><%=sexo.getDescricao()%></option>
                                     <%
@@ -103,14 +104,11 @@
                         <br>
                         <label class="label-texto" for="estadoCivil">Estado civil</label>
                         <select name="estadoCivil">
-                            <option selected="true" ><%=request.getParameter("estado")%></option>
+                            <%String estadoCivilPessoa = new EstadoCivilDao().getDescricao(pessoa.getEstadoCivil());%>
+                            <option selected="true" ><%=estadoCivilPessoa%></option>
                             <%
-                                EstadoCivilDao daoe = new EstadoCivilDao();
-                                ArrayList<EstadoCivil> arraye;
-                                arraye = daoe.findAll();
-
-                                for(EstadoCivil estado : arraye){
-                                   if(! estado.getDescricao().equals(request.getParameter("estado"))){
+                                for(EstadoCivil estado : new EstadoCivilDao().findAll()){
+                                   if(! estado.getDescricao().equals(estadoCivilPessoa)){
                                     %><option><%=estado.getDescricao()%> </option><%
                                    }
                                 }
@@ -118,10 +116,10 @@
                             
                         </select>
                         <br>
+                        <%Morada moradaPessoa = new MoradaDao().findById(pessoa.getMorada());%>
                         <div class="div-localizacao">
                             <% 
-                                String comuna = request.getParameter("comuna");
-                                Comuna nova = new ComunaDao().findOne(comuna);
+                                Comuna nova = new ComunaDao().findOne(moradaPessoa.getComuna());
                                 Integer idMuni = nova.getMunicipio();
                                 Municipio municipio = new MunicipioDao().findMunicipio(idMuni);
                                 String provincia = new ProvinciaDao().getDescricao(municipio.getProvincia());
@@ -164,6 +162,7 @@
                             </select>
                             <label class="label-texto" for="comuna">Comuna <span class="bg-red"> *</span> : </label>
                             <select class="div-localizacao-interior" name="comuna" required="true">
+                                <%String comuna = new ComunaDao().getDescricao(moradaPessoa.getComuna());%>
                                 <option selected="true" ><%=comuna%></option>
                                 <%
                                    
@@ -182,13 +181,16 @@
                         </div>
                             <label class="label-texto" for="">Morada  </label> <br>
                         <label class="label-texto" for="bairro">Bairro: </label>
-                        <input type="text" name="bairro"  value="<%=request.getParameter("bairro") %>">
+                        <input type="text" name="bairro"  value="<%=moradaPessoa.getBairro()%>">
                         <br>
                         <label class="label-texto" for="rua">Rua : </label>
-                        <input type="text" name="rua"  value="<%=request.getParameter("rua") %>">
+                        <input type="text" name="rua"  value="<%=moradaPessoa.getRua() %>">
                         <br>
                         <label class="label-texto" for="casa">Número da Casa: </label>
-                        <input type="number" name="ncasa"  value="<%=request.getParameter("casa") %>">
+                        <input type="number" name="ncasa"  value="<%=moradaPessoa.getnCasa()%>">
+                         <br>
+                        <label class="label-texto" for="dataCadastro">Data de Cadastro</label>
+                        <input type="date" name="dataCadastro" value="<%=pessoa.getDatacadastro()%>">
                         <br>
                         <p class="bg-red">Campos obrigatórios *</p>
                         <input type="submit" class="btn button-enviar" value="Editar">

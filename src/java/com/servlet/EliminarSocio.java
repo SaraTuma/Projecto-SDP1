@@ -5,6 +5,8 @@
  */
 package com.servlet;
 
+import com.ucan.dao.SocioDao;
+import com.ucan.modelo.Socio;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -32,15 +34,23 @@ public class EliminarSocio extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EliminarSocio</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EliminarSocio at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String mensagem=null;
+            Integer socioId = Integer.parseInt(request.getParameter("id"));
+            SocioDao socioDao = new SocioDao();
+            Socio socio = socioDao.findId(socioId);
+            
+            if(socioId!=null){
+                if(socioDao.delete(socioId)){
+                    mensagem = "Eliminado com sucesso: Socio - ID - "+socioId;
+                }
+                else{
+                    mensagem = "Erro : ao Eliminar!! Id - "+socioId;
+                }
+            }
+            else{
+                mensagem = "Erro : Socio nao foi cadastrado!!";
+            }
+            response.sendRedirect("Paginas/socio.jsp?erro="+mensagem);
         }
     }
 

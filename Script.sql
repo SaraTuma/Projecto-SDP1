@@ -1,4 +1,14 @@
+/***************************************************************/
+/*  Autor    : Sara Tuma, 10000 21693                          */
+/*  Ficherio : Script.sql                                      */
+/*  Descrição: implementação do script da base de dados        */ 
+/***************************************************************/
+
+DROP DATABASE IF EXISTS clube;
+
 CREATE DATABASE clube;
+
+USE clube;
 
 -- Criando tabelas para a localização e tabelas auxiliares
 CREATE TABLE provincia
@@ -87,14 +97,14 @@ CREATE TABLE telefone
 (
     pk_telefone 	serial NOT NULL PRIMARY KEY,
     descricao 		character varying NOT NULL,
-    fk_pessoa 		integer NOT NULL REFERENCES pessoa (pk_pessoa)
+    fk_pessoa 		integer NOT NULL REFERENCES pessoa (pk_pessoa) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE email
 (
     pk_email 		serial NOT NULL PRIMARY KEY,
     descricao 		character varying NOT NULL,
-    fk_pessoa 		integer NOT NULL REFERENCES pessoa (pk_pessoa)
+    fk_pessoa 		integer NOT NULL REFERENCES pessoa (pk_pessoa) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE realizador
@@ -176,18 +186,18 @@ INSERT INTO classificacao(descricao) VALUES ('Adultos');
 
 -- Genero do filme
 
-INSERT INTO genero(descricao) VALUES ('Comédia');
+INSERT INTO genero(descricao) VALUES ('Comedia');
 INSERT INTO genero(descricao) VALUES ('Aventura');
-INSERT INTO genero(descricao) VALUES ('Ação');
+INSERT INTO genero(descricao) VALUES ('Accao');
 INSERT INTO genero(descricao) VALUES ('Romance');
 INSERT INTO genero(descricao) VALUES ('Drama');
 INSERT INTO genero(descricao) VALUES ('Terror');
 INSERT INTO genero(descricao) VALUES ('Infatil');
-INSERT INTO genero(descricao) VALUES ('Dança');
-INSERT INTO genero(descricao) VALUES ('Documentário');
+INSERT INTO genero(descricao) VALUES ('Danca');
+INSERT INTO genero(descricao) VALUES ('Documentario');
 INSERT INTO genero(descricao) VALUES ('Espionagem');
 INSERT INTO genero(descricao) VALUES ('Fantasia');
-INSERT INTO genero(descricao) VALUES ('Ficção Científica');
+INSERT INTO genero(descricao) VALUES ('Ficcao Cientifica');
 INSERT INTO genero(descricao) VALUES ('Musical');
 INSERT INTO genero(descricao) VALUES ('Thriller');
 
@@ -202,7 +212,7 @@ INSERT INTO sexo(descricao) VALUES ('Masculino');
 INSERT INTO estado_civil(descricao) VALUES ('Solteiro/a');
 INSERT INTO estado_civil(descricao) VALUES ('Casado/a');
 INSERT INTO estado_civil(descricao) VALUES ('Divorciado/a');
-INSERT INTO estado_civil(descricao) VALUES ('Viúvo/a');
+INSERT INTO estado_civil(descricao) VALUES ('Viuvo/a');
 
 -- Insert da localização (Provincias, Municipios e Comunas)
 
@@ -926,9 +936,6 @@ INSERT INTO public.email( descricao, fk_pessoa)VALUES ( 'edson@gmail.com', 17);
 INSERT INTO public.email( descricao, fk_pessoa)VALUES ( 'valter@gmail.com', 18);
 INSERT INTO public.email( descricao, fk_pessoa)VALUES ( 'evanildo@hotmail.com', 19);
 INSERT INTO public.email( descricao, fk_pessoa)VALUES ( 'dulcia@gmail.com', 20);
-
-
-
 
 -- Realizador 
 

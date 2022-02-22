@@ -50,6 +50,7 @@
                 <li class="link"><a href="alugar.jsp">Alugar</a></li>
                 <li class="link"><a href="#">Telefone</a></li>
                 <li class="link"><a href="email.jsp">Email</a></li>
+                <li class="link"><a href="formDefesa.jsp">Defesa</a></li>
             </ul>
         </section>
         <section class="seccao-direita">
@@ -96,7 +97,7 @@
                                         
                                         <td>
                                             <a class="btn btn-editar" href="./crud/editarTelefone.jsp?id=<%=pessoa.getId()%>&telefone=<%=telefone.getDescricao()%>">Editar</a>
-                                            <a class="btn btn-eliminar" href="./crud/eliminarEmail.jsp?id=<%=pessoa.getId()%>&pessoa=<%=pessoa.getNomeCompleto()%>&email=<%=telefone.getDescricao()%>">Eliminar</a>
+                                            <a class="btn btn-eliminar" href="./crud/eliminarTelefone.jsp?id=<%=pessoa.getId()%>&pessoa=<%=pessoa.getNomeCompleto()%>&telefone=<%=telefone.getDescricao()%>">Eliminar</a>
                                         </td>
                                     </tr>
                             <%

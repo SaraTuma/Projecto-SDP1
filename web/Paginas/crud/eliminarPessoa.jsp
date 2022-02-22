@@ -4,6 +4,12 @@
     Author     : saratuma
 --%>
 
+<%@page import="com.ucan.dao.MoradaDao"%>
+<%@page import="com.ucan.modelo.Morada"%>
+<%@page import="com.ucan.dao.EstadoCivilDao"%>
+<%@page import="com.ucan.dao.SexoDao"%>
+<%@page import="com.ucan.modelo.Pessoa"%>
+<%@page import="com.ucan.dao.PessoaDao"%>
 <%@page import="com.ucan.dao.ProvinciaDao"%>
 <%@page import="com.ucan.modelo.Municipio"%>
 <%@page import="com.ucan.dao.MunicipioDao"%>
@@ -50,43 +56,39 @@
         </section>
         <section class="seccao-direita">
         <section id="seccao-3" class="seccao-editar">
-                <h1 class="h1-title">Eliminar : <%=request.getParameter("nome") %></h1>
-                <form id="formEditar" class="form-Style formEditar" action="../../EliminarPessoa?id=<%=request.getParameter("id")%>" method="post" >
-                 
+                <h1 class="h1-title">Eliminar Dados de uma Pessoa</h1>
+                <% Integer pessoaId = Integer.parseInt(request.getParameter("id").trim());%>
+                <form id="formEditar" class="form-Style formEditar" action="../../EliminarPessoa?id=<%=pessoaId%>" method="post" >
+                    <%
+                    Pessoa pessoa = new PessoaDao().findId(pessoaId);
+                    %>
                         <label class="label-texto" for="pnome">Primeiro nome</label>
-                        <input type="text" name="pnome" disabled="disabled" value="<%=request.getParameter("nome") %>">
+                        <input type="text" name="pnome" disabled="disabled" value="<%=pessoa.getPrimeiroNome() %>">
                         <br>
                         <label class="label-texto" for="unome">Ultimo nome</label>
-                        <input type="text" name="unome" disabled="disabled" value="<%=request.getParameter("nome") %>">
+                        <input type="text" name="unome" disabled="disabled" value="<%=pessoa.getUltimoNome() %>">
                         <br>
                         <label class="label-texto" for="bi">Numero do BI (Bilhete de Identidade) : </label>
-                        <input type="text" name="bi" disabled="disabled" value="<%=request.getParameter("bi") %>">
+                        <input type="text" name="bi" disabled="disabled" value="<%=pessoa.getNumbi() %>">
                         <br>
                         <label class="label-texto" for="dataNasc">Data de Nascimento : </label>
-                        <input type="date" name="dataNasc" disabled="disabled" value="<%=request.getParameter("data") %>">
-                        <br>
-                        <label class="label-texto" for="telefone">Telefone : </label>
-                        <input type="tel" name="telefone" disabled="disabled" value="<%=request.getParameter("telefone")%>">
-                        
-                        <br>
-                        <label class="label-texto" for="email">E-mail : </label>
-                        <input type="email" name="email" disabled="disabled" value=<%=request.getParameter("email")%>>
+                        <input type="date" name="dataNasc" disabled="disabled" value="<%=pessoa.getDataNasc() %>">
                         <br>
                         <label class="label-texto" for="sexo">Sexo : </label>
                         <select name="sexo" >
-                            <option selected="true" disabled="disabled"><%=request.getParameter("sexo")%></option>
+                            <option selected="true" disabled="disabled"><%=new SexoDao().getDescricao(pessoa.getSexo())%></option>
                         </select>
                         <br>
                         <label class="label-texto" for="estadoCivil">Estado Civil : </label>
                         <select name="estadoCivil" >
-                            <option selected="true" disabled="disabled"><%=request.getParameter("estado")%></option>
+                            <option selected="true" disabled="disabled"><%=new EstadoCivilDao().getDescricao(pessoa.getEstadoCivil())%></option>
                         </select>
                         <br>
                         <label class="label-texto" for="localizacao">Localização </label>
+                        <%Morada moradaPessoa = new MoradaDao().findById(pessoa.getMorada());%>
                         <div class="div-localizacao">
                             <% 
-                                String comuna = request.getParameter("comuna");
-                                Comuna nova = new ComunaDao().findOne(comuna);
+                                Comuna nova = new ComunaDao().findOne(moradaPessoa.getComuna());
                                 Integer idMuni = nova.getMunicipio();
                                 Municipio municipio = new MunicipioDao().findMunicipio(idMuni);
                                 String provincia = new ProvinciaDao().getDescricao(municipio.getProvincia());
@@ -98,19 +100,24 @@
                                 <option selected="true" disabled="disabled"><%=municipio.getDescricao()%></option>
                             </select>
                             <select class="div-localizacao-interior" name="Comuna">
+                                <%String comuna = new ComunaDao().getDescricao(moradaPessoa.getComuna());%>
                                 <option selected="true" disabled="disabled"><%=comuna%></option>
                             </select>
                         </div>
                             <label class="label-texto" for="">Morada  </label> <br>
                         <label class="label-texto" for="bairro">Bairro: </label>
-                        <input type="text" name="bairro" disabled="disabled" value="<%=request.getParameter("bairro") %>">
+                        <input type="text" name="bairro" disabled="disabled" value="<%=moradaPessoa.getBairro() %>">
                         <br>
                         <label class="label-texto" for="rua">Rua : </label>
-                        <input type="text" name="rua" disabled="disabled" value="<%=request.getParameter("rua") %>">
+                        <input type="text" name="rua" disabled="disabled" value="<%=moradaPessoa.getRua()%>">
                         <br>
                         <label class="label-texto" for="casa">Número da Casa: </label>
-                        <input type="number" name="ncasa" disabled="disabled" value="<%=request.getParameter("casa") %>">
+                        <input type="number" name="ncasa" disabled="disabled" value="<%=moradaPessoa.getnCasa()%>">
                         <br>
+                        <label class="label-texto" for="dataCadastro">Data de Cadastro</label>
+                        <input type="date" name="dataCadastro" disabled="disabled" value="<%=pessoa.getDatacadastro()%>">
+                        <br>
+                        
                         <p class="p-erro"></p>
                         <input type="submit" class="btn" value="Eliminar">
                         <a class="btn btn-eliminar" href="../pessoa.jsp">Cancelar</a>
