@@ -1,3 +1,21 @@
+Situação 6
+
+Imagine que o proprietário de um clube de vídeo o contratou para desenvolver uma base de dados para gerir o seu negócio.
+Depois de ter analisado os seus requisitos verificou que este pretendia manter actualizada: 
+
+i. Uma lista de filmes com informação apropriada (titulo português, titulo original ,sinopse, duração, realizador e sua nacionalidade, actores principais e suas nacionalidades, duração, género (comédia, aventura ,etc.), classificação (Maior/6, M/12, M/16, M/18, Adultos) )
+
+ii. A lista de sócios com os seus dados pessoais (nome ,morada, telemóveis, emails, data de nascimento ,número do bilhete de identidade)
+
+iii. Os alugueres efectuados com data de aluguer e devolução
+
+
+Exemplo de busca para a defesa:
+	Criar uma consulta que mostre os filmes que determinado socio alugou em um determinado intervalo de anos de uma determinada classificacao e que tenham idade superior a 12 anos.
+
+
+Para a defesa do projecto:
+
 - identificar as tabelas
 - seus relacionamentos 
 - o que vai receber pela jsp : ano, mes1, mes2, genero do filme
