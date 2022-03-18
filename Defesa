@@ -9,6 +9,23 @@
 
 Busca da defesa:
 
-	Mostrar os socios cujo nome começa com determinada letra que alugaram filmes de determinado genero em um intervalo de meses de determinado ano.
+	Mostrar os socios cujo nome começa com determinada letra que alugaram filmes de 	determinado genero em um intervalo de meses de determinado ano.
+	
+	
+	select pnome , unome from pessoa pe inner join socio so on pe.pk_pessoa=so.fk_pessoa 
+		inner join alugar alu on so.pk_socio=alu.fk_socio 
+		inner join filme fil on alu.fk_filme=fil.pk_filme 
+		where pnome like 'letra%' and fil.fk_genero=? and 
+		date_part('month',alu.data_alugar) between ? and ? 
+		and date_part('year',alu.data_alugar)=?
+		
+		
+		
+		
+		
 
-sugestao : mostrar quantas vezes determinado socio, alugou determinado filme.
+sugestao : mostrar quantos filmes determinado socio alugou de determinado genero.
+	select f.fk_genero, count(al.fk_filme) from filme f 
+		inner join alugar al on (al.fk_filme=f.pk_filme) 
+		inner join socio on (pk_socio=fk_socio) 
+		where pk_socio=4 and f.fk_genero=4 group by f.fk_genero 
